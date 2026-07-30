@@ -1,0 +1,32 @@
+<h2>Cargar Nueva Subcategoría</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <div>
+    <label for="idCat">Categoría *</label>
+    <select id="idCat" name="idCat"
+            [(ngModel)]="subcategoria.idCat" required>
+      <option [value]="0" disabled>Seleccioná una categoría</option>
+      <option *ngFor="let cat of categorias" [value]="cat.idCat">
+        {{ cat.nombreCategoria }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label for="nombreSubcat">Nombre de la subcategoría *</label>
+    <input type="text" id="nombreSubcat" name="nombreSubcat"
+           [(ngModel)]="subcategoria.nombreSubcat"
+           required maxlength="150"
+           placeholder="ej: Hotel 3 estrellas, Bodegón, Iglesia/Templo" />
+  </div>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : 'Guardar subcategoría' }}
+  </button>
+
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>
