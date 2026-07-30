@@ -1,0 +1,8 @@
+# --- Sistema Operativo / Editor (a nivel de todo el repo) ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Variables de entorno sensibles ---
+.env

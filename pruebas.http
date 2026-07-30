@@ -1,0 +1,24 @@
+
+## Base de Datos
+GET http://localhost:8080/api/categorias
+
+### Buscar categorías
+GET http://localhost:8080/api/categorias/buscar?texto=hotel
+
+### Crear una categoría
+POST http://localhost:8080/api/categorias
+Content-Type: application/json
+
+{
+  "prefijo": "TST",
+  "nombreCategoria": "Test"
+}
+
+### Nuevo add
+POST http://localhost:8080/api/categorias
+Content-Type: application/json
+
+{
+  "prefijo": "PAR",
+  "nombreCategoria": "Parque"
+}
