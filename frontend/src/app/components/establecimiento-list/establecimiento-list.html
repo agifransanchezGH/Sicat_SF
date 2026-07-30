@@ -1,0 +1,25 @@
+<h2>Buscar Establecimiento</h2>
+
+<input
+  type="text"
+  placeholder="Buscar por nombre..."
+  [(ngModel)]="textoBusqueda"
+  (input)="buscar()"
+/>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID_establecimiento</th>
+      <th>Prefijo</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let estab of establecimiento">
+      <td>{{ estab.idEstab }}</td>
+      <td>{{ estab.nombre }}</td>
+      <td>{{ estab.direccion }}</td>
+    </tr>
+  </tbody>
+</table>

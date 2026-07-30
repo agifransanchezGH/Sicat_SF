@@ -1,0 +1,159 @@
+<h2>Cargar Nuevo Establecimiento</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <!-- SECCIÓN: Clasificación -->
+  <fieldset>
+    <legend>Clasificación</legend>
+
+    <div>
+      <label for="idCat">Categoría *</label>
+      <select id="idCat" name="idCat" [(ngModel)]="establecimiento.idCat" required>
+        <option value="0" disabled>Seleccioná una categoría</option>
+        <option *ngFor="let cat of categorias" [value]="cat.idCat">
+          {{ cat.nombreCategoria }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label for="nombre">Nombre *</label>
+      <input type="text" id="nombre" name="nombre"
+             [(ngModel)]="establecimiento.nombre"
+             required maxlength="150" />
+    </div>
+
+    <div>
+      <label for="estado">Estado</label>
+      <input type="text" id="estado" name="estado"
+             [(ngModel)]="establecimiento.estado"
+             maxlength="20" placeholder="Activo" />
+    </div>
+
+    <div>
+      <label for="anioInauguracion">Año de inauguración</label>
+      <input type="number" id="anioInauguracion" name="anioInauguracion"
+             [(ngModel)]="establecimiento.anioInauguracion"
+             min="1800" max="2100" />
+    </div>
+  </fieldset>
+
+  <!-- SECCIÓN: Ubicación -->
+  <fieldset>
+    <legend>Ubicación</legend>
+
+    <div>
+      <label for="direccion">Dirección</label>
+      <input type="text" id="direccion" name="direccion"
+             [(ngModel)]="establecimiento.direccion"
+             maxlength="250" />
+    </div>
+  </fieldset>
+
+  <!-- SECCIÓN: Contacto -->
+  <fieldset>
+    <legend>Contacto</legend>
+
+    <div>
+      <label for="telFijo">Teléfono fijo</label>
+      <input type="text" id="telFijo" name="telFijo"
+             [(ngModel)]="establecimiento.telFijo"
+             maxlength="30" placeholder="0342-XXXXXXX" />
+    </div>
+
+    <div>
+      <label for="telMovil">Teléfono móvil</label>
+      <input type="text" id="telMovil" name="telMovil"
+             [(ngModel)]="establecimiento.telMovil"
+             maxlength="30" placeholder="342XXXXXXXX" />
+    </div>
+
+    <div>
+      <label for="whatsapp">WhatsApp</label>
+      <input type="text" id="whatsapp" name="whatsapp"
+             [(ngModel)]="establecimiento.whatsapp"
+             maxlength="20" placeholder="342XXXXXXXX" />
+    </div>
+
+    <div>
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo"
+             [(ngModel)]="establecimiento.correo"
+             maxlength="150" />
+    </div>
+  </fieldset>
+
+  <!-- SECCIÓN: Presencia digital -->
+  <fieldset>
+    <legend>Presencia digital</legend>
+
+    <div>
+      <label for="web">Sitio web</label>
+      <input type="text" id="web" name="web"
+             [(ngModel)]="establecimiento.web"
+             maxlength="250" placeholder="https://www.ejemplo.com" />
+    </div>
+
+    <div>
+      <label for="instagram">Instagram</label>
+      <input type="text" id="instagram" name="instagram"
+             [(ngModel)]="establecimiento.instagram"
+             maxlength="100" placeholder="nombreusuario (sin @)" />
+    </div>
+
+    <div>
+      <label for="facebook">Facebook</label>
+      <input type="text" id="facebook" name="facebook"
+             [(ngModel)]="establecimiento.facebook"
+             maxlength="250" />
+    </div>
+
+    <div>
+      <label for="redesSociales">Redes sociales que utiliza</label>
+      <input type="text" id="redesSociales" name="redesSociales"
+             [(ngModel)]="establecimiento.redesSociales"
+             maxlength="200" placeholder="Facebook|Instagram|TikTok" />
+    </div>
+  </fieldset>
+
+  <!-- SECCIÓN: Personal -->
+  <fieldset>
+    <legend>Personal</legend>
+
+    <div>
+      <label for="personalPermanente">Personal permanente</label>
+      <input type="number" id="personalPermanente" name="personalPermanente"
+             [(ngModel)]="establecimiento.personalPermanente"
+             min="0" />
+    </div>
+
+    <div>
+      <label for="personalEventual">Personal eventual</label>
+      <input type="number" id="personalEventual" name="personalEventual"
+             [(ngModel)]="establecimiento.personalEventual"
+             min="0" />
+    </div>
+  </fieldset>
+
+  <!-- SECCIÓN: Observaciones -->
+  <fieldset>
+    <legend>Observaciones</legend>
+
+    <div>
+      <label for="observaciones">Observaciones</label>
+      <textarea id="observaciones" name="observaciones"
+                [(ngModel)]="establecimiento.observaciones"
+                maxlength="500" rows="4"></textarea>
+    </div>
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' 
+    : 'Guardar establecimiento' }}
+  </button>
+
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>

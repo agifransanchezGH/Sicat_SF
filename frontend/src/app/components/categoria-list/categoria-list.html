@@ -1,0 +1,26 @@
+
+<h2>Buscar Categorías</h2>
+
+<input
+  type="text"
+  placeholder="Buscar por nombre..."
+  [(ngModel)]="textoBusqueda"
+  (input)="buscar()"
+/>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Prefijo</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cat of categorias">
+      <td>{{ cat.idCat }}</td>
+      <td>{{ cat.prefijo }}</td>
+      <td>{{ cat.nombreCategoria }}</td>
+    </tr>
+  </tbody>
+</table>

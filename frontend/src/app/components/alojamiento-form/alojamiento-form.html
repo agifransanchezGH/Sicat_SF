@@ -1,0 +1,145 @@
+<h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Detalle de Alojamiento</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <!-- ID del establecimiento -->
+  <fieldset>
+    <legend>Establecimiento</legend>
+    <div>
+      <label for="idEstab">ID de establecimiento *</label>
+      <input type="text" id="idEstab" name="idEstab"
+             [(ngModel)]="alojamiento.idEstab"
+             [readonly]="modoEdicion"
+             required
+             placeholder="SICAT-HOT-00001" />
+      <small>Debe corresponder a un establecimiento de categoría HOT o DEL ya creado.</small>
+    </div>
+  </fieldset>
+
+  <!-- Clasificación -->
+  <fieldset>
+    <legend>Clasificación</legend>
+
+    <div>
+      <label for="tipoAlojamiento">Tipo de alojamiento</label>
+      <input type="text" id="tipoAlojamiento" name="tipoAlojamiento"
+             [(ngModel)]="alojamiento.tipoAlojamiento"
+             maxlength="60"
+             placeholder="Hotel 3 estrellas / Hostel / Delegación..." />
+    </div>
+
+    <div>
+      <label for="reformas">Realizó reformas en los últimos 4 años</label>
+      <select id="reformas" name="reformas"
+              [(ngModel)]="alojamiento.reformasUltimos4Anios">
+        <option [ngValue]="null">Sin datos</option>
+        <option [ngValue]="true">Sí</option>
+        <option [ngValue]="false">No</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="observacionesReforma">Detalle de reformas</label>
+      <textarea id="observacionesReforma" name="observacionesReforma"
+                [(ngModel)]="alojamiento.observacionesReforma"
+                maxlength="300" rows="2"
+                placeholder="Completar si realizó reformas"></textarea>
+    </div>
+  </fieldset>
+
+  <!-- Capacidad -->
+  <fieldset>
+    <legend>Capacidad</legend>
+
+    <div>
+      <label for="cantHabitaciones">Cantidad de habitaciones</label>
+      <input type="number" id="cantHabitaciones" name="cantHabitaciones"
+             [(ngModel)]="alojamiento.cantHabitaciones"
+             min="1" />
+    </div>
+
+    <div>
+      <label for="tiposHabitaciones">Tipos de habitaciones</label>
+      <input type="text" id="tiposHabitaciones" name="tiposHabitaciones"
+             [(ngModel)]="alojamiento.tiposHabitaciones"
+             maxlength="300"
+             placeholder="Single|Doble|Triple|Suite|Accesibles" />
+      <small>Separar con | (pipe)</small>
+    </div>
+
+    <div>
+      <label for="totalPlazas">Total de plazas</label>
+      <input type="number" id="totalPlazas" name="totalPlazas"
+             [(ngModel)]="alojamiento.totalPlazas"
+             min="1" />
+    </div>
+
+    <div>
+      <label for="cantHabAccesibles">Habitaciones accesibles</label>
+      <input type="number" id="cantHabAccesibles" name="cantHabAccesibles"
+             [(ngModel)]="alojamiento.cantHabAccesibles"
+             min="0" />
+    </div>
+
+    <div>
+      <label for="cantPlazasAccesibles">Plazas accesibles</label>
+      <input type="number" id="cantPlazasAccesibles" name="cantPlazasAccesibles"
+             [(ngModel)]="alojamiento.cantPlazasAccesibles"
+             min="0" />
+    </div>
+  </fieldset>
+
+  <!-- Servicios -->
+  <fieldset>
+    <legend>Servicios</legend>
+
+    <div>
+      <label for="serviciosGenerales">Servicios generales</label>
+      <textarea id="serviciosGenerales" name="serviciosGenerales"
+                [(ngModel)]="alojamiento.serviciosGenerales"
+                maxlength="500" rows="3"
+                placeholder="WiFi|Desayuno|Estacionamiento|Piscina|Spa|Pet Friendly"></textarea>
+      <small>Separar con | (pipe)</small>
+    </div>
+
+    <div>
+      <label for="equipamientoHabitacion">Equipamiento en habitaciones</label>
+      <textarea id="equipamientoHabitacion" name="equipamientoHabitacion"
+                [(ngModel)]="alojamiento.equipamientoHabitacion"
+                maxlength="300" rows="2"
+                placeholder="TV|Aire acondicionado|Frigobar|Caja de seguridad|WiFi"></textarea>
+      <small>Separar con | (pipe)</small>
+    </div>
+
+    <div>
+      <label for="salaEventosNombreCap">Sala para eventos (nombre y capacidad)</label>
+      <input type="text" id="salaEventosNombreCap" name="salaEventosNombreCap"
+             [(ngModel)]="alojamiento.salaEventosNombreCap"
+             maxlength="300"
+             placeholder="Salón Principal · Cap: 150 personas" />
+    </div>
+  </fieldset>
+
+  <!-- Calidad -->
+  <fieldset>
+    <legend>Sistema de información y calidad</legend>
+
+    <div>
+      <label for="sistemaInfoCalidad">Herramientas de calidad</label>
+      <textarea id="sistemaInfoCalidad" name="sistemaInfoCalidad"
+                [(ngModel)]="alojamiento.sistemaInfoCalidad"
+                maxlength="400" rows="2"
+                placeholder="Encuesta de satisfacción|Estadísticas mensuales|Distinción de calidad"></textarea>
+      <small>Separar con | (pipe)</small>
+    </div>
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar alojamiento') }}
+  </button>
+
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>
