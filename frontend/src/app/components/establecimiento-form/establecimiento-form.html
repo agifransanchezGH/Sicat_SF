@@ -20,11 +20,12 @@
     <div>
       <label for="idCat">Categoría *</label>
       <select id="idCat" name="idCat" [(ngModel)]="establecimiento.idCat" (change)="onCategoriaChange()" required>
-        <option value="-1" disabled>Seleccioná una categoría</option>
-        <option *ngFor="let cat of categorias" [value]="cat.idCat">
+        <option [ngValue]="-1" disabled>Seleccioná una categoría</option>
+        <option *ngFor="let cat of categorias" [ngValue]="cat.idCat">
           {{ cat.nombreCategoria }}
         </option>
       </select>
+      <p>idCat seleccionado: {{ establecimiento.idCat }}</p>
     </div>
 
 
@@ -226,6 +227,13 @@
       ></textarea>
     </div>
   </fieldset>
+
+  <!-- Renderizado dinámico -->
+<ng-container [ngSwitch]="establecimiento.idCat">
+  <app-alojamiento-form *ngSwitchCase="1"></app-alojamiento-form>
+
+  <div *ngSwitchDefault>Seleccioná una categoría para continuar</div>
+</ng-container>
 
   <button type="submit" [disabled]="cargando">
     {{ cargando ? 'Guardando...' : 'Guardar establecimiento' }}

@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { EstablecimientoService } from '../../shared/services/establecimiento.service';
 import { CategoriaService } from '../../shared/services/categoria.service';
 import { Establecimiento } from '../../shared/models/establecimiento.model';
 import { Categoria } from '../../shared/models/categoria.model';
 import { Subcategoria } from '../../shared/models/subcategoria.model';
 import { SubcategoriaService } from '../../shared/services/subcategoria.service';
+import { AlojamientoFormComponent } from '../alojamiento-form/alojamiento-form';
 
 @Component({
   selector: 'app-establecimiento-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, AlojamientoFormComponent, NgSwitch,NgSwitchCase,NgSwitchDefault],
   templateUrl: './establecimiento-form.html',
   styleUrl: './establecimiento-form.css'
 })
@@ -78,7 +79,7 @@ export class EstablecimientoFormComponent implements OnInit {
   }
 
   private limpiarFormulario(): void {
-  this.establecimiento = { idCat: 0, nombre: '', estado: 'Activo' };
+  this.establecimiento = { idCat: -1, nombre: '', estado: 'Activo' };
   this.subcategorias = [];
 }
 

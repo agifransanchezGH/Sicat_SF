@@ -9,7 +9,7 @@ import { RelevamientoFormComponent } from './components/relevamiento-form/releva
 import { ContactoReferenteFormComponent } from './components/contacto-referente-form/contacto-referente-form';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'listado', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'cargar', component: CategoriaFormComponent },
   { path: 'listado', component: CategoriaListComponent },
   { path: 'establecimiento/cargar', component: EstablecimientoFormComponent },
