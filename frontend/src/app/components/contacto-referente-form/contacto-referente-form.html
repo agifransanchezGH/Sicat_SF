@@ -1,0 +1,81 @@
+<h2>Contacto Referente</h2>
+<p><strong>Uso interno exclusivo — estos datos no se publican.</strong></p>
+
+<form (ngSubmit)="guardar()">
+
+  <fieldset>
+    <legend>Datos del referente</legend>
+
+    <div>
+      <label for="idEstab">ID de establecimiento *</label>
+      <input type="text" id="idEstab" name="idEstab"
+             [(ngModel)]="contacto.idEstab"
+             required placeholder="SICAT-HOT-00001" />
+    </div>
+
+    <div>
+      <label for="nombreReferente">Nombre y apellido</label>
+      <input type="text" id="nombreReferente" name="nombreReferente"
+             [(ngModel)]="contacto.nombreReferente"
+             maxlength="150" placeholder="Juan Pérez" />
+    </div>
+
+    <div>
+      <label for="cargo">Cargo</label>
+      <input type="text" id="cargo" name="cargo"
+             [(ngModel)]="contacto.cargo"
+             maxlength="130" placeholder="Gerente / Recepcionista / Dueño..." />
+    </div>
+
+    <div>
+      <label for="telefonoReferente">Teléfono</label>
+      <input type="text" id="telefonoReferente" name="telefonoReferente"
+             [(ngModel)]="contacto.telefonoReferente"
+             maxlength="20" placeholder="342XXXXXXXX" />
+    </div>
+
+    <div>
+      <label for="correoReferente">Correo electrónico</label>
+      <input type="email" id="correoReferente" name="correoReferente"
+             [(ngModel)]="contacto.correoReferente"
+             maxlength="150" placeholder="referente@ejemplo.com" />
+    </div>
+
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : 'Agregar contacto' }}
+  </button>
+
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>
+
+<!-- Listado de contactos del establecimiento -->
+<div *ngIf="contactos.length > 0">
+  <h3>Contactos registrados</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cargo</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of contactos">
+        <td>{{ c.nombreReferente ?? '—' }}</td>
+        <td>{{ c.cargo ?? '—' }}</td>
+        <td>{{ c.telefonoReferente ?? '—' }}</td>
+        <td>{{ c.correoReferente ?? '—' }}</td>
+        <td>
+          <button type="button" (click)="eliminar(c.idRef!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

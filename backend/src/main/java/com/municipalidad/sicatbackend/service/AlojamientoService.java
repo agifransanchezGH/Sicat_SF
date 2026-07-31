@@ -1,7 +1,6 @@
 package com.municipalidad.sicatbackend.service;
 
 import com.municipalidad.sicatbackend.entity.Alojamiento;
-import com.municipalidad.sicatbackend.entity.Establecimiento;
 import com.municipalidad.sicatbackend.repository.AlojamientoRepository;
 import com.municipalidad.sicatbackend.repository.EstablecimientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

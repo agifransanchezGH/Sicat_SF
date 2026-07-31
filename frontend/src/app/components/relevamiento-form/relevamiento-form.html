@@ -1,0 +1,82 @@
+
+
+Relevamiento form · HTML
+<h2>Registrar Relevamiento</h2>
+ 
+<form (ngSubmit)="guardar()">
+ 
+  <fieldset>
+    <legend>Datos del relevamiento</legend>
+ 
+    <div>
+      <label for="idEstab">ID de establecimiento *</label>
+      <input type="text" id="idEstab" name="idEstab"
+             [(ngModel)]="relevamiento.idEstab"
+             required placeholder="SICAT-HOT-00001" />
+    </div>
+ 
+    <div>
+      <label for="fechaRelevamiento">Fecha de relevamiento</label>
+      <input type="date" id="fechaRelevamiento" name="fechaRelevamiento"
+             [(ngModel)]="relevamiento.fechaRelevamiento" />
+    </div>
+ 
+    <div>
+      <label for="tecnico">Técnico responsable</label>
+      <input type="text" id="tecnico" name="tecnico"
+             [(ngModel)]="relevamiento.tecnicoResponsable"
+             maxlength="100" placeholder="Nombre y apellido" />
+    </div>
+ 
+    <div>
+      <label for="estadoCarga">Estado de carga</label>
+      <select id="estadoCarga" name="estadoCarga"
+              [(ngModel)]="relevamiento.estadoCarga">
+        <option *ngFor="let e of estados" [value]="e">{{ e }}</option>
+      </select>
+    </div>
+ 
+    <div>
+      <label for="observacionesCarga">Observaciones</label>
+      <textarea id="observacionesCarga" name="observacionesCarga"
+                [(ngModel)]="relevamiento.observacionesCarga"
+                maxlength="500" rows="3"
+                placeholder="Notas del relevamiento..."></textarea>
+    </div>
+ 
+  </fieldset>
+ 
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : 'Registrar relevamiento' }}
+  </button>
+ 
+</form>
+ 
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>
+ 
+<div *ngIf="historial.length > 0">
+  <h3>Historial de relevamientos</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Técnico</th>
+        <th>Estado</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of historial">
+        <td>{{ r.idRelev }}</td>
+        <td>{{ r.fechaRelevamiento }}</td>
+        <td>{{ r.tecnicoResponsable ?? '—' }}</td>
+        <td>{{ r.estadoCarga }}</td>
+        <td>{{ r.observacionesCarga ?? '—' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+ 

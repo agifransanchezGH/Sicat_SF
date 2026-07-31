@@ -1,0 +1,7 @@
+/* archivo establecimiento-form.css */
+select {
+  width: 250px;   /* ancho fijo */
+  height: 35px;   /* alto fijo */
+  padding: 5px;   /* espacio interno */
+  font-size: 14px;
+}

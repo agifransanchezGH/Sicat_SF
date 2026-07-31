@@ -5,6 +5,8 @@ import { EstablecimientoService } from '../../shared/services/establecimiento.se
 import { CategoriaService } from '../../shared/services/categoria.service';
 import { Establecimiento } from '../../shared/models/establecimiento.model';
 import { Categoria } from '../../shared/models/categoria.model';
+import { Subcategoria } from '../../shared/models/subcategoria.model';
+import { SubcategoriaService } from '../../shared/services/subcategoria.service';
 
 @Component({
   selector: 'app-establecimiento-form',
@@ -16,7 +18,7 @@ import { Categoria } from '../../shared/models/categoria.model';
 export class EstablecimientoFormComponent implements OnInit {
 
   establecimiento: Establecimiento = {
-    idCat: 0,
+    idCat: -1,
     nombre: '',
     estado: 'Activo'
   };
@@ -25,11 +27,13 @@ export class EstablecimientoFormComponent implements OnInit {
   mensaje = '';
   exito = false;
   cargando = false;
-
   constructor(
     private establecimientoService: EstablecimientoService,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private subcategoriaService: SubcategoriaService
   ) {}
+
+  subcategorias: Subcategoria[] = [];
 
   ngOnInit(): void {
     this.categoriaService.listar().subscribe({
@@ -38,8 +42,17 @@ export class EstablecimientoFormComponent implements OnInit {
     });
   }
 
+  onCategoriaChange(): void {
+  if (this.establecimiento.idCat !== -1) {
+    this.subcategoriaService
+      .listarPorCategoria(this.establecimiento.idCat)
+      .subscribe({ next: (data) => this.subcategorias = data });
+  } else {
+    this.subcategorias = [];
+  }
+}
   guardar(): void {
-    if (!this.establecimiento.idCat || !this.establecimiento.nombre.trim()) {
+    if (this.establecimiento.idCat === -1 || !this.establecimiento.nombre.trim()) {
       this.mensaje = 'Categoría y nombre son obligatorios';
       this.exito = false;
       return;
@@ -65,6 +78,8 @@ export class EstablecimientoFormComponent implements OnInit {
   }
 
   private limpiarFormulario(): void {
-    this.establecimiento = { idCat: 0, nombre: '', estado: 'Activo' };
-  }
+  this.establecimiento = { idCat: 0, nombre: '', estado: 'Activo' };
+  this.subcategorias = [];
+}
+
 }
