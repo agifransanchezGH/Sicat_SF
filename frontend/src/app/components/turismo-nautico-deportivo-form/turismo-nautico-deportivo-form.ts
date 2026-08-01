@@ -14,21 +14,25 @@ import { TurismoNauticoDeportivoService } from '../../shared/services/turismo-na
 export class TurismoNauticoDeportivoFormComponent {
   turismo: TurismoNauticoDeportivo = {
     idEstab: '',
-    subcategoriaNautica: '',
-    tipoNautico: '',
-    puertoBase: '',
-    embarcacionesCantidad: undefined,
-    embarcacionesTipo: '',
-    serviciosAdicionales: '',
-    temporadaOperativa: '',
-    salidaConGuia: false,
-    deportesAcuaticos: '',
-    escuelaNautica: false,
-    numeroAlumnos: undefined,
-    zonaProtegida: '',
-    habilitaciones: '',
-    descripcion: '',
-    observaciones: ''
+    subcategoriaNau: '',
+    funcionamiento: '',
+    deportes: '',
+    instalaciones: '',
+    serviciosClub: '',
+    requisitosAdmision: '',
+    deportesNauticos: '',
+    cantEmbarcaciones: undefined,
+    serviciosNauticos: '',
+    serviciosActivNau: '',
+    cantEquipoNautico: undefined,
+    serviciosGuarderia: '',
+    actividadesRecreacion: '',
+    cantAmarres: undefined,
+    serviciosParador: '',
+    accesoPlaya: '',
+    temporada: '',
+    productosPesca: '',
+    tipoPesca: ''
   };
 
   mensaje: string | null = null;
@@ -44,7 +48,7 @@ export class TurismoNauticoDeportivoFormComponent {
     this.turismoService.crear(this.turismo).subscribe({
       next: () => {
         this.mensaje = 'Registro creado correctamente.';
-        form.resetForm({ salidaConGuia: false, escuelaNautica: false });
+        form.resetForm();
       },
       error: (error) => {
         this.mensaje = 'Error al guardar el registro: ' + error.message;

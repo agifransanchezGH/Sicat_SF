@@ -8,20 +8,20 @@
       <tr>
         <th>ID Estab</th>
         <th>Subcategoría</th>
-        <th>Tipo</th>
-        <th>Puerto Base</th>
+        <th>Funcionamiento</th>
+        <th>Acceso a Playa</th>
         <th>Embarcaciones</th>
-        <th>Salida con Guía</th>
+        <th>Equipo Náutico</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let turismo of turismos">
         <td>{{ turismo.idEstab }}</td>
-        <td>{{ turismo.subcategoriaNautica }}</td>
-        <td>{{ turismo.tipoNautico }}</td>
-        <td>{{ turismo.puertoBase }}</td>
-        <td>{{ turismo.embarcacionesCantidad }} {{ turismo.embarcacionesTipo }}</td>
-        <td>{{ turismo.salidaConGuia ? 'Sí' : 'No' }}</td>
+        <td>{{ turismo.subcategoriaNau }}</td>
+        <td>{{ turismo.funcionamiento }}</td>
+        <td>{{ turismo.accesoPlaya }}</td>
+        <td>{{ turismo.cantEmbarcaciones }}</td>
+        <td>{{ turismo.cantEquipoNautico }}</td>
       </tr>
     </tbody>
   </table>

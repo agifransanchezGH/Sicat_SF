@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface TurismoNauticoDeportivoRepository extends JpaRepository<TurismoNauticoDeportivo, String> {
-    List<TurismoNauticoDeportivo> findBySubcategoriaNautica(String subcategoriaNautica);
-    List<TurismoNauticoDeportivo> findByTipoNautico(String tipoNautico);
-    List<TurismoNauticoDeportivo> findByPuertoBase(String puertoBase);
+    List<TurismoNauticoDeportivo> findBySubcategoriaNau(String subcategoriaNau);
+    List<TurismoNauticoDeportivo> findByFuncionamiento(String funcionamiento);
+    List<TurismoNauticoDeportivo> findByAccesoPlaya(String accesoPlaya);
 }

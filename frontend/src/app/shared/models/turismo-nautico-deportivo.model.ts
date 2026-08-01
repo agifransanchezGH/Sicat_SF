@@ -1,18 +1,22 @@
 export interface TurismoNauticoDeportivo {
   idEstab: string;
-  subcategoriaNautica?: string;
-  tipoNautico?: string;
-  puertoBase?: string;
-  embarcacionesCantidad?: number;
-  embarcacionesTipo?: string;
-  serviciosAdicionales?: string;
-  temporadaOperativa?: string;
-  salidaConGuia?: boolean;
-  deportesAcuaticos?: string;
-  escuelaNautica?: boolean;
-  numeroAlumnos?: number;
-  zonaProtegida?: string;
-  habilitaciones?: string;
-  descripcion?: string;
-  observaciones?: string;
+  subcategoriaNau?: string;
+  funcionamiento?: string;
+  deportes?: string;
+  instalaciones?: string;
+  serviciosClub?: string;
+  requisitosAdmision?: string;
+  deportesNauticos?: string;
+  cantEmbarcaciones?: number;
+  serviciosNauticos?: string;
+  serviciosActivNau?: string;
+  cantEquipoNautico?: number;
+  serviciosGuarderia?: string;
+  actividadesRecreacion?: string;
+  cantAmarres?: number;
+  serviciosParador?: string;
+  accesoPlaya?: string;
+  temporada?: string;
+  productosPesca?: string;
+  tipoPesca?: string;
 }

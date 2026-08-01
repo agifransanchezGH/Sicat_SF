@@ -10,98 +10,122 @@ public class TurismoNauticoDeportivo {
     @Column(name = "id_estab", length = 20)
     private String idEstab;
 
-    @Column(name = "subcategoria_nautica", length = 100)
-    private String subcategoriaNautica;
+    @Column(name = "subcategoria_nau", length = 100)
+    private String subcategoriaNau;
 
-    @Column(name = "tipo_nautico", length = 100)
-    private String tipoNautico;
+    @Column(name = "funcionamiento", length = 30)
+    private String funcionamiento;
 
-    @Column(name = "puerto_base", length = 150)
-    private String puertoBase;
+    @Column(name = "deportes", length = 300)
+    private String deportes;
 
-    @Column(name = "embarcaciones_cantidad")
-    private Short embarcacionesCantidad;
+    @Column(name = "instalaciones", length = 500)
+    private String instalaciones;
 
-    @Column(name = "embarcaciones_tipo", length = 150)
-    private String embarcacionesTipo;
+    @Column(name = "servicios_club", length = 300)
+    private String serviciosClub;
 
-    @Column(name = "servicios_adicionales", length = 250)
-    private String serviciosAdicionales;
+    @Column(name = "requisitos_admision", length = 300)
+    private String requisitosAdmision;
 
-    @Column(name = "temporada_operativa", length = 100)
-    private String temporadaOperativa;
+    @Column(name = "deportes_nauticos", length = 300)
+    private String deportesNauticos;
 
-    @Column(name = "salida_con_guia")
-    private Boolean salidaConGuia;
+    @Column(name = "cant_embarcaciones")
+    private Short cantEmbarcaciones;
 
-    @Column(name = "deportes_acuaticos", length = 200)
-    private String deportesAcuaticos;
+    @Column(name = "servicios_nauticos", length = 300)
+    private String serviciosNauticos;
 
-    @Column(name = "escuela_nautica")
-    private Boolean escuelaNautica;
+    @Column(name = "servicios_activ_nau", length = 300)
+    private String serviciosActivNau;
 
-    @Column(name = "numero_alumnos")
-    private Short numeroAlumnos;
+    @Column(name = "cant_equipo_nautico")
+    private Short cantEquipoNautico;
 
-    @Column(name = "zona_protegida", length = 200)
-    private String zonaProtegida;
+    @Column(name = "servicios_guarderia", length = 300)
+    private String serviciosGuarderia;
 
-    @Column(name = "habilitaciones", length = 250)
-    private String habilitaciones;
+    @Column(name = "actividades_recreacion", length = 200)
+    private String actividadesRecreacion;
 
-    @Column(name = "descripcion", length = 500)
-    private String descripcion;
+    @Column(name = "cant_amarres")
+    private Short cantAmarres;
 
-    @Column(name = "observaciones", length = 500)
-    private String observaciones;
+    @Column(name = "servicios_parador", length = 400)
+    private String serviciosParador;
+
+    @Column(name = "acceso_playa", length = 100)
+    private String accesoPlaya;
+
+    @Column(name = "temporada", length = 100)
+    private String temporada;
+
+    @Column(name = "productos_pesca", length = 300)
+    private String productosPesca;
+
+    @Column(name = "tipo_pesca", length = 200)
+    private String tipoPesca;
 
     public TurismoNauticoDeportivo() {}
 
     public String getIdEstab() { return idEstab; }
     public void setIdEstab(String idEstab) { this.idEstab = idEstab; }
 
-    public String getSubcategoriaNautica() { return subcategoriaNautica; }
-    public void setSubcategoriaNautica(String subcategoriaNautica) { this.subcategoriaNautica = subcategoriaNautica; }
+    public String getSubcategoriaNau() { return subcategoriaNau; }
+    public void setSubcategoriaNau(String subcategoriaNau) { this.subcategoriaNau = subcategoriaNau; }
 
-    public String getTipoNautico() { return tipoNautico; }
-    public void setTipoNautico(String tipoNautico) { this.tipoNautico = tipoNautico; }
+    public String getFuncionamiento() { return funcionamiento; }
+    public void setFuncionamiento(String funcionamiento) { this.funcionamiento = funcionamiento; }
 
-    public String getPuertoBase() { return puertoBase; }
-    public void setPuertoBase(String puertoBase) { this.puertoBase = puertoBase; }
+    public String getDeportes() { return deportes; }
+    public void setDeportes(String deportes) { this.deportes = deportes; }
 
-    public Short getEmbarcacionesCantidad() { return embarcacionesCantidad; }
-    public void setEmbarcacionesCantidad(Short embarcacionesCantidad) { this.embarcacionesCantidad = embarcacionesCantidad; }
+    public String getInstalaciones() { return instalaciones; }
+    public void setInstalaciones(String instalaciones) { this.instalaciones = instalaciones; }
 
-    public String getEmbarcacionesTipo() { return embarcacionesTipo; }
-    public void setEmbarcacionesTipo(String embarcacionesTipo) { this.embarcacionesTipo = embarcacionesTipo; }
+    public String getServiciosClub() { return serviciosClub; }
+    public void setServiciosClub(String serviciosClub) { this.serviciosClub = serviciosClub; }
 
-    public String getServiciosAdicionales() { return serviciosAdicionales; }
-    public void setServiciosAdicionales(String serviciosAdicionales) { this.serviciosAdicionales = serviciosAdicionales; }
+    public String getRequisitosAdmision() { return requisitosAdmision; }
+    public void setRequisitosAdmision(String requisitosAdmision) { this.requisitosAdmision = requisitosAdmision; }
 
-    public String getTemporadaOperativa() { return temporadaOperativa; }
-    public void setTemporadaOperativa(String temporadaOperativa) { this.temporadaOperativa = temporadaOperativa; }
+    public String getDeportesNauticos() { return deportesNauticos; }
+    public void setDeportesNauticos(String deportesNauticos) { this.deportesNauticos = deportesNauticos; }
 
-    public Boolean getSalidaConGuia() { return salidaConGuia; }
-    public void setSalidaConGuia(Boolean salidaConGuia) { this.salidaConGuia = salidaConGuia; }
+    public Short getCantEmbarcaciones() { return cantEmbarcaciones; }
+    public void setCantEmbarcaciones(Short cantEmbarcaciones) { this.cantEmbarcaciones = cantEmbarcaciones; }
 
-    public String getDeportesAcuaticos() { return deportesAcuaticos; }
-    public void setDeportesAcuaticos(String deportesAcuaticos) { this.deportesAcuaticos = deportesAcuaticos; }
+    public String getServiciosNauticos() { return serviciosNauticos; }
+    public void setServiciosNauticos(String serviciosNauticos) { this.serviciosNauticos = serviciosNauticos; }
 
-    public Boolean getEscuelaNautica() { return escuelaNautica; }
-    public void setEscuelaNautica(Boolean escuelaNautica) { this.escuelaNautica = escuelaNautica; }
+    public String getServiciosActivNau() { return serviciosActivNau; }
+    public void setServiciosActivNau(String serviciosActivNau) { this.serviciosActivNau = serviciosActivNau; }
 
-    public Short getNumeroAlumnos() { return numeroAlumnos; }
-    public void setNumeroAlumnos(Short numeroAlumnos) { this.numeroAlumnos = numeroAlumnos; }
+    public Short getCantEquipoNautico() { return cantEquipoNautico; }
+    public void setCantEquipoNautico(Short cantEquipoNautico) { this.cantEquipoNautico = cantEquipoNautico; }
 
-    public String getZonaProtegida() { return zonaProtegida; }
-    public void setZonaProtegida(String zonaProtegida) { this.zonaProtegida = zonaProtegida; }
+    public String getServiciosGuarderia() { return serviciosGuarderia; }
+    public void setServiciosGuarderia(String serviciosGuarderia) { this.serviciosGuarderia = serviciosGuarderia; }
 
-    public String getHabilitaciones() { return habilitaciones; }
-    public void setHabilitaciones(String habilitaciones) { this.habilitaciones = habilitaciones; }
+    public String getActividadesRecreacion() { return actividadesRecreacion; }
+    public void setActividadesRecreacion(String actividadesRecreacion) { this.actividadesRecreacion = actividadesRecreacion; }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public Short getCantAmarres() { return cantAmarres; }
+    public void setCantAmarres(Short cantAmarres) { this.cantAmarres = cantAmarres; }
 
-    public String getObservaciones() { return observaciones; }
-    public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
+    public String getServiciosParador() { return serviciosParador; }
+    public void setServiciosParador(String serviciosParador) { this.serviciosParador = serviciosParador; }
+
+    public String getAccesoPlaya() { return accesoPlaya; }
+    public void setAccesoPlaya(String accesoPlaya) { this.accesoPlaya = accesoPlaya; }
+
+    public String getTemporada() { return temporada; }
+    public void setTemporada(String temporada) { this.temporada = temporada; }
+
+    public String getProductosPesca() { return productosPesca; }
+    public void setProductosPesca(String productosPesca) { this.productosPesca = productosPesca; }
+
+    public String getTipoPesca() { return tipoPesca; }
+    public void setTipoPesca(String tipoPesca) { this.tipoPesca = tipoPesca; }
 }

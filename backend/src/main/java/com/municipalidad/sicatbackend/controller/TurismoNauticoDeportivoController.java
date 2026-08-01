@@ -48,13 +48,13 @@ public class TurismoNauticoDeportivoController {
         return service.buscarPorSubcategoria(subcategoria);
     }
 
-    @GetMapping("/tipo/{tipo}")
-    public List<TurismoNauticoDeportivo> buscarPorTipo(@PathVariable String tipo) {
-        return service.buscarPorTipo(tipo);
+    @GetMapping("/funcionamiento/{funcionamiento}")
+    public List<TurismoNauticoDeportivo> buscarPorFuncionamiento(@PathVariable String funcionamiento) {
+        return service.buscarPorFuncionamiento(funcionamiento);
     }
 
-    @GetMapping("/puerto/{puerto}")
-    public List<TurismoNauticoDeportivo> buscarPorPuerto(@PathVariable String puerto) {
-        return service.buscarPorPuerto(puerto);
+    @GetMapping("/acceso-playa/{accesoPlaya}")
+    public List<TurismoNauticoDeportivo> buscarPorAccesoPlaya(@PathVariable String accesoPlaya) {
+        return service.buscarPorAccesoPlaya(accesoPlaya);
     }
 }

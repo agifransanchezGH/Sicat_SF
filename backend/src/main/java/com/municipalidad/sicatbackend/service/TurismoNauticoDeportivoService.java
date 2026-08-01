@@ -45,21 +45,25 @@ public class TurismoNauticoDeportivoService {
                 .orElseThrow(() -> new RuntimeException(
                         "No existe registro de turismo náutico deportivo para: " + idEstab));
 
-        if (datos.getSubcategoriaNautica() != null) existente.setSubcategoriaNautica(datos.getSubcategoriaNautica());
-        if (datos.getTipoNautico() != null) existente.setTipoNautico(datos.getTipoNautico());
-        if (datos.getPuertoBase() != null) existente.setPuertoBase(datos.getPuertoBase());
-        if (datos.getEmbarcacionesCantidad() != null) existente.setEmbarcacionesCantidad(datos.getEmbarcacionesCantidad());
-        if (datos.getEmbarcacionesTipo() != null) existente.setEmbarcacionesTipo(datos.getEmbarcacionesTipo());
-        if (datos.getServiciosAdicionales() != null) existente.setServiciosAdicionales(datos.getServiciosAdicionales());
-        if (datos.getTemporadaOperativa() != null) existente.setTemporadaOperativa(datos.getTemporadaOperativa());
-        if (datos.getSalidaConGuia() != null) existente.setSalidaConGuia(datos.getSalidaConGuia());
-        if (datos.getDeportesAcuaticos() != null) existente.setDeportesAcuaticos(datos.getDeportesAcuaticos());
-        if (datos.getEscuelaNautica() != null) existente.setEscuelaNautica(datos.getEscuelaNautica());
-        if (datos.getNumeroAlumnos() != null) existente.setNumeroAlumnos(datos.getNumeroAlumnos());
-        if (datos.getZonaProtegida() != null) existente.setZonaProtegida(datos.getZonaProtegida());
-        if (datos.getHabilitaciones() != null) existente.setHabilitaciones(datos.getHabilitaciones());
-        if (datos.getDescripcion() != null) existente.setDescripcion(datos.getDescripcion());
-        if (datos.getObservaciones() != null) existente.setObservaciones(datos.getObservaciones());
+        if (datos.getSubcategoriaNau() != null) existente.setSubcategoriaNau(datos.getSubcategoriaNau());
+        if (datos.getFuncionamiento() != null) existente.setFuncionamiento(datos.getFuncionamiento());
+        if (datos.getDeportes() != null) existente.setDeportes(datos.getDeportes());
+        if (datos.getInstalaciones() != null) existente.setInstalaciones(datos.getInstalaciones());
+        if (datos.getServiciosClub() != null) existente.setServiciosClub(datos.getServiciosClub());
+        if (datos.getRequisitosAdmision() != null) existente.setRequisitosAdmision(datos.getRequisitosAdmision());
+        if (datos.getDeportesNauticos() != null) existente.setDeportesNauticos(datos.getDeportesNauticos());
+        if (datos.getCantEmbarcaciones() != null) existente.setCantEmbarcaciones(datos.getCantEmbarcaciones());
+        if (datos.getServiciosNauticos() != null) existente.setServiciosNauticos(datos.getServiciosNauticos());
+        if (datos.getServiciosActivNau() != null) existente.setServiciosActivNau(datos.getServiciosActivNau());
+        if (datos.getCantEquipoNautico() != null) existente.setCantEquipoNautico(datos.getCantEquipoNautico());
+        if (datos.getServiciosGuarderia() != null) existente.setServiciosGuarderia(datos.getServiciosGuarderia());
+        if (datos.getActividadesRecreacion() != null) existente.setActividadesRecreacion(datos.getActividadesRecreacion());
+        if (datos.getCantAmarres() != null) existente.setCantAmarres(datos.getCantAmarres());
+        if (datos.getServiciosParador() != null) existente.setServiciosParador(datos.getServiciosParador());
+        if (datos.getAccesoPlaya() != null) existente.setAccesoPlaya(datos.getAccesoPlaya());
+        if (datos.getTemporada() != null) existente.setTemporada(datos.getTemporada());
+        if (datos.getProductosPesca() != null) existente.setProductosPesca(datos.getProductosPesca());
+        if (datos.getTipoPesca() != null) existente.setTipoPesca(datos.getTipoPesca());
 
         return repository.save(existente);
     }
@@ -72,15 +76,15 @@ public class TurismoNauticoDeportivoService {
         return repository.findAll();
     }
 
-    public List<TurismoNauticoDeportivo> buscarPorSubcategoria(String subcategoriaNautica) {
-        return repository.findBySubcategoriaNautica(subcategoriaNautica);
+    public List<TurismoNauticoDeportivo> buscarPorSubcategoria(String subcategoriaNau) {
+        return repository.findBySubcategoriaNau(subcategoriaNau);
     }
 
-    public List<TurismoNauticoDeportivo> buscarPorTipo(String tipoNautico) {
-        return repository.findByTipoNautico(tipoNautico);
+    public List<TurismoNauticoDeportivo> buscarPorFuncionamiento(String funcionamiento) {
+        return repository.findByFuncionamiento(funcionamiento);
     }
 
-    public List<TurismoNauticoDeportivo> buscarPorPuerto(String puertoBase) {
-        return repository.findByPuertoBase(puertoBase);
+    public List<TurismoNauticoDeportivo> buscarPorAccesoPlaya(String accesoPlaya) {
+        return repository.findByAccesoPlaya(accesoPlaya);
     }
 }
