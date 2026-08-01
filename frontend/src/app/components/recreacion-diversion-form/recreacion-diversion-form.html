@@ -1,0 +1,126 @@
+<h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Recreación / Diversión</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <fieldset>
+    <legend>Datos generales</legend>
+
+    <div>
+      <label for="idEstab">ID de establecimiento *</label>
+      <input id="idEstab" name="idEstab" type="text"
+             [(ngModel)]="recreacion.idEstab"
+             [readonly]="modoEdicion"
+             placeholder="SICAT-REC-00001"
+             required />
+    </div>
+
+    <div>
+      <label for="subcategoriaRecreacion">Subcategoría</label>
+      <select id="subcategoriaRecreacion" name="subcategoriaRecreacion"
+              [(ngModel)]="recreacion.subcategoriaRecreacion">
+        <option value="">-- Seleccionar --</option>
+        <option *ngFor="let sub of subcategorias" [value]="sub">{{ sub }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="tipoServicio">Tipo de servicio</label>
+      <select id="tipoServicio" name="tipoServicio"
+              [(ngModel)]="recreacion.tipoServicio">
+        <option value="">-- Seleccionar --</option>
+        <option *ngFor="let servicio of servicios" [value]="servicio">{{ servicio }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="capacidadPersonas">Capacidad de personas</label>
+      <input id="capacidadPersonas" name="capacidadPersonas" type="number"
+             [(ngModel)]="recreacion.capacidadPersonas"
+             min="0" />
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="accesoAdaptado"
+               [(ngModel)]="recreacion.accesoAdaptado" />
+        Acceso adaptado
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset *ngIf="esAcuatica()">
+    <legend>Bloque acuático</legend>
+
+    <div>
+      <label for="cantidadPiscinas">Cantidad de piscinas</label>
+      <input id="cantidadPiscinas" name="cantidadPiscinas" type="number"
+             [(ngModel)]="recreacion.cantidadPiscinas"
+             min="0" />
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="acuaticoCubierto"
+               [(ngModel)]="recreacion.acuaticoCubierto" />
+        Acuático cubierto
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset *ngIf="esDeportiva()">
+    <legend>Bloque deportivo</legend>
+
+    <div>
+      <label for="cantidadCancha">Cantidad de canchas</label>
+      <input id="cantidadCancha" name="cantidadCancha" type="number"
+             [(ngModel)]="recreacion.cantidadCancha"
+             min="0" />
+    </div>
+
+    <div>
+      <label for="tipoInstalacionesDeportivas">Tipo instalaciones deportivas</label>
+      <input id="tipoInstalacionesDeportivas" name="tipoInstalacionesDeportivas" type="text"
+             [(ngModel)]="recreacion.tipoInstalacionesDeportivas"
+             maxlength="150"
+             placeholder="Cancha de fútbol | Pádel | Tenis | Gimnasio" />
+    </div>
+  </fieldset>
+
+  <fieldset *ngIf="esDiversion()">
+    <legend>Bloque diversión</legend>
+
+    <div>
+      <label for="cantidadSalasJuegos">Cantidad de salas de juegos</label>
+      <input id="cantidadSalasJuegos" name="cantidadSalasJuegos" type="number"
+             [(ngModel)]="recreacion.cantidadSalasJuegos"
+             min="0" />
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="tieneSalaEscape"
+               [(ngModel)]="recreacion.tieneSalaEscape" />
+        Tiene sala de escape
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Observaciones</legend>
+
+    <div>
+      <textarea id="observaciones" name="observaciones"
+                [(ngModel)]="recreacion.observaciones"
+                maxlength="500" rows="4"
+                placeholder="Finalidades, restricciones, servicios adicionales..."></textarea>
+    </div>
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar recreación/diversión') }}
+  </button>
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>

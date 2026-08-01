@@ -11,9 +11,18 @@
         </mat-tab>
       </mat-tab-group>
     </mat-tab>
-
+    <!-------------------------------------------------------------------------------------------->>
     <mat-tab label="Listado / Búsqueda">
-      <app-establecimiento-list></app-establecimiento-list>
+
+      <mat-tab-group>
+        <mat-tab label="Establecimiento">
+          <app-establecimiento-list></app-establecimiento-list>
+        </mat-tab>
+        
+        <mat-tab label="Categoria">
+          <app-categoria-list ></app-categoria-list>
+        </mat-tab>
+      </mat-tab-group>
     </mat-tab>
   </mat-tab-group>
 </nav>

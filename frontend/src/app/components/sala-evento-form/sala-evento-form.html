@@ -1,0 +1,80 @@
+<h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Sala de Evento</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <fieldset>
+    <legend>Datos de la sala</legend>
+
+    <div>
+      <label for="idEstab">ID de sala evento *</label>
+      <input id="idEstab" name="idEstab" type="text"
+             [(ngModel)]="salaEvento.idEstab"
+             [readonly]="modoEdicion"
+             placeholder="SICAT-EVS-00001"
+             required />
+    </div>
+
+    <div>
+      <label for="idEstabPadre">ID de establecimiento padre</label>
+      <input id="idEstabPadre" name="idEstabPadre" type="text"
+             [(ngModel)]="salaEvento.idEstabPadre"
+             placeholder="SICAT-ALO-00001" />
+      <small>Si pertenece a un hotel o complejo, indique el ID del establecimiento padre.</small>
+    </div>
+
+    <div>
+      <label for="nombreSala">Nombre de la sala</label>
+      <input id="nombreSala" name="nombreSala" type="text"
+             [(ngModel)]="salaEvento.nombreSala"
+             maxlength="150"
+             placeholder="Sala Gran Eventual" />
+    </div>
+
+    <div>
+      <label for="tipoSala">Tipo de sala</label>
+      <input id="tipoSala" name="tipoSala" type="text"
+             [(ngModel)]="salaEvento.tipoSala"
+             maxlength="100"
+             placeholder="Salón de eventos | Auditorio | Salón VIP" />
+    </div>
+
+    <div>
+      <label for="capacidadPersonas">Capacidad de personas</label>
+      <input id="capacidadPersonas" name="capacidadPersonas" type="number"
+             [(ngModel)]="salaEvento.capacidadPersonas"
+             min="0" />
+    </div>
+
+    <div>
+      <label for="superficieM2">Superficie (m²)</label>
+      <input id="superficieM2" name="superficieM2" type="number"
+             [(ngModel)]="salaEvento.superficieM2"
+             min="0" />
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="tieneAudio"
+               [(ngModel)]="salaEvento.tieneAudio" />
+        Tiene sistema de audio
+      </label>
+    </div>
+
+    <div>
+      <label for="observaciones">Observaciones</label>
+      <textarea id="observaciones" name="observaciones"
+                [(ngModel)]="salaEvento.observaciones"
+                maxlength="500" rows="4"
+                placeholder="Detalles extra, restricciones, servicios incluidos..."></textarea>
+    </div>
+
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar sala de evento') }}
+  </button>
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>

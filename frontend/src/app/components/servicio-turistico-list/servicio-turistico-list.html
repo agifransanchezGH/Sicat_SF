@@ -1,0 +1,26 @@
+<h2>Listado de Servicios Turísticos</h2>
+
+<div>
+  <input type="text" placeholder="Filtrar por subcategoría..." [(ngModel)]="filtroTexto" (input)="buscar()" />
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Subcategoría</th>
+      <th>Tipo</th>
+      <th>Nombre</th>
+      <th>Contacto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of servicios">
+      <td>{{ item.idEstab }}</td>
+      <td>{{ item.subcategoriaServicio }}</td>
+      <td>{{ item.tipoServicio }}</td>
+      <td>{{ item.nombreServicio }}</td>
+      <td>{{ item.contacto }}</td>
+    </tr>
+  </tbody>
+</table>

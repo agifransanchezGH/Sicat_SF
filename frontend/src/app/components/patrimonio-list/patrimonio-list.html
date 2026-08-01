@@ -1,0 +1,26 @@
+<h2>Listado de Patrimonios</h2>
+
+<div>
+  <input type="text" placeholder="Filtrar por subcategoría..." [(ngModel)]="filtroTexto" (input)="buscar()" />
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Subcategoría</th>
+      <th>Tipo</th>
+      <th>Acceso público</th>
+      <th>Valor cultural</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of patrimonios">
+      <td>{{ item.idEstab }}</td>
+      <td>{{ item.subcategoriaPatrimonio }}</td>
+      <td>{{ item.tipoPatrimonio }}</td>
+      <td>{{ item.accesoPublico ? 'Sí' : 'No' }}</td>
+      <td>{{ item.valorCultural }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -8,11 +8,33 @@ import { Categoria } from '../../shared/models/categoria.model';
 import { Subcategoria } from '../../shared/models/subcategoria.model';
 import { SubcategoriaService } from '../../shared/services/subcategoria.service';
 import { AlojamientoFormComponent } from '../alojamiento-form/alojamiento-form';
+import { GastronomiaFormComponent } from '../gastronomia-form/gastronomia-form';
+import { MuseoSalaCulturalFormComponent } from '../museosalacultural-form/museosalacultural-form';
+import { SalaEventoFormComponent } from '../sala-evento-form/sala-evento-form';
+import { RecreacionDiversionFormComponent } from '../recreacion-diversion-form/recreacion-diversion-form';
+import { PatrimonioFormComponent } from '../patrimonio-form/patrimonio-form';
+import { ServicioTuristicoFormComponent } from '../servicio-turistico-form/servicio-turistico-form';
+import { TurismoNauticoDeportivoFormComponent } from '../turismo-nautico-deportivo-form/turismo-nautico-deportivo-form';
+
+
 
 @Component({
   selector: 'app-establecimiento-form',
   standalone: true,
-  imports: [FormsModule, CommonModule, AlojamientoFormComponent, NgSwitch,NgSwitchCase,NgSwitchDefault],
+  imports: [
+    FormsModule, 
+    CommonModule, 
+    AlojamientoFormComponent,
+    GastronomiaFormComponent,
+    MuseoSalaCulturalFormComponent,
+    SalaEventoFormComponent,
+    RecreacionDiversionFormComponent,
+    PatrimonioFormComponent,
+    ServicioTuristicoFormComponent,
+    TurismoNauticoDeportivoFormComponent,
+    NgSwitch,NgSwitchCase,
+    NgSwitchDefault
+  ],
   templateUrl: './establecimiento-form.html',
   styleUrl: './establecimiento-form.css'
 })

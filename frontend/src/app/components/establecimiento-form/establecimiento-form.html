@@ -231,8 +231,14 @@
   <!-- Renderizado dinámico -->
 <ng-container [ngSwitch]="establecimiento.idCat">
   <app-alojamiento-form *ngSwitchCase="1"></app-alojamiento-form>
-
-  <div *ngSwitchDefault>Seleccioná una categoría para continuar</div>
+  <app-alojamiento-form *ngSwitchCase="2"></app-alojamiento-form>
+  <app-gastronomia-form *ngSwitchCase="3"></app-gastronomia-form>
+  <app-museo-sala-cultural-form *ngSwitchCase="4"></app-museo-sala-cultural-form>
+  <app-sala-evento-form *ngSwitchCase="5"></app-sala-evento-form>
+  <app-recreacion-diversion-form *ngSwitchCase="6"></app-recreacion-diversion-form>
+  <app-patrimonio-form *ngSwitchCase="7"></app-patrimonio-form>
+  <app-servicio-turistico-form *ngSwitchCase="8"></app-servicio-turistico-form>
+  <app-turismo-nautico-deportivo-form *ngSwitchCase="9"></app-turismo-nautico-deportivo-form>
 </ng-container>
 
   <button type="submit" [disabled]="cargando">

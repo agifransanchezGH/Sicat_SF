@@ -1,0 +1,107 @@
+<h2>Cargar Turismo Náutico Deportivo</h2>
+
+<form #turismoForm="ngForm" (ngSubmit)="guardar(turismoForm)">
+  <fieldset>
+    <legend>Datos generales</legend>
+
+    <div class="form-group">
+      <label for="idEstab">ID Establecimiento</label>
+      <input id="idEstab" name="idEstab" required [(ngModel)]="turismo.idEstab" />
+    </div>
+
+    <div class="form-group">
+      <label for="subcategoriaNautica">Subcategoría Náutica</label>
+      <input id="subcategoriaNautica" name="subcategoriaNautica" [(ngModel)]="turismo.subcategoriaNautica" />
+    </div>
+
+    <div class="form-group">
+      <label for="tipoNautico">Tipo Náutico</label>
+      <input id="tipoNautico" name="tipoNautico" [(ngModel)]="turismo.tipoNautico" />
+    </div>
+
+    <div class="form-group">
+      <label for="puertoBase">Puerto Base</label>
+      <input id="puertoBase" name="puertoBase" [(ngModel)]="turismo.puertoBase" />
+    </div>
+
+    <div class="form-group">
+      <label for="temporadaOperativa">Temporada Operativa</label>
+      <input id="temporadaOperativa" name="temporadaOperativa" [(ngModel)]="turismo.temporadaOperativa" />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Información de embarcaciones</legend>
+
+    <div class="form-group">
+      <label for="embaracacionesCantidad">Cantidad de Embarcaciones</label>
+      <input id="embaracacionesCantidad" name="embaracacionesCantidad" type="number" [(ngModel)]="turismo.embarcacionesCantidad" />
+    </div>
+
+    <div class="form-group">
+      <label for="embaracacionesTipo">Tipo de Embarcaciones</label>
+      <input id="embaracacionesTipo" name="embaracacionesTipo" [(ngModel)]="turismo.embarcacionesTipo" />
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" name="salidaConGuia" [(ngModel)]="turismo.salidaConGuia" />
+        Salida con guía
+      </label>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" name="escuelaNautica" [(ngModel)]="turismo.escuelaNautica" />
+        Escuela Náutica
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="numeroAlumnos">Número de Alumnos</label>
+      <input id="numeroAlumnos" name="numeroAlumnos" type="number" [(ngModel)]="turismo.numeroAlumnos" />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Servicios y condiciones</legend>
+
+    <div class="form-group">
+      <label for="serviciosAdicionales">Servicios Adicionales</label>
+      <input id="serviciosAdicionales" name="serviciosAdicionales" [(ngModel)]="turismo.serviciosAdicionales" />
+    </div>
+
+    <div class="form-group">
+      <label for="deportesAcuaticos">Deportes Acuáticos</label>
+      <input id="deportesAcuaticos" name="deportesAcuaticos" [(ngModel)]="turismo.deportesAcuaticos" />
+    </div>
+
+    <div class="form-group">
+      <label for="zonaProtegida">Zona Protegida</label>
+      <input id="zonaProtegida" name="zonaProtegida" [(ngModel)]="turismo.zonaProtegida" />
+    </div>
+
+    <div class="form-group">
+      <label for="habilitaciones">Habilitaciones</label>
+      <input id="habilitaciones" name="habilitaciones" [(ngModel)]="turismo.habilitaciones" />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Descripción y observaciones</legend>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion" rows="3" [(ngModel)]="turismo.descripcion"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="observaciones">Observaciones</label>
+      <textarea id="observaciones" name="observaciones" rows="3" [(ngModel)]="turismo.observaciones"></textarea>
+    </div>
+  </fieldset>
+
+  <button type="submit">Guardar</button>
+
+  <div class="mensaje" *ngIf="mensaje">{{ mensaje }}</div>
+</form>

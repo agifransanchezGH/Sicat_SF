@@ -1,0 +1,101 @@
+<h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Detalle de Gastronomía</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <fieldset>
+    <legend>Establecimiento</legend>
+    <div>
+      <label for="idEstab">ID de establecimiento *</label>
+      <input type="text" id="idEstab" name="idEstab"
+             [(ngModel)]="gastronomia.idEstab"
+             [readonly]="modoEdicion"
+             required placeholder="SICAT-GAS-00001" />
+      <small>Debe corresponder a un establecimiento de categoría GAS ya creado.</small>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Clasificación</legend>
+
+    <div>
+      <label for="subcategoriaGastro">Subcategoría</label>
+      <input type="text" id="subcategoriaGastro" name="subcategoriaGastro"
+             [(ngModel)]="gastronomia.subcategoriaGastro"
+             maxlength="100"
+             placeholder="Restaurante | Bodegón | Bar | Café | Heladería..." />
+    </div>
+
+    <div>
+      <label for="tipoCocina">Tipo de cocina</label>
+      <input type="text" id="tipoCocina" name="tipoCocina"
+             [(ngModel)]="gastronomia.tipoCocina"
+             maxlength="150"
+             placeholder="Cocina tradicional | Pescado de río | Parrilla | Vegana..." />
+    </div>
+
+    <div>
+      <label for="zonaCiudad">Zona de la ciudad</label>
+      <input type="text" id="zonaCiudad" name="zonaCiudad"
+             [(ngModel)]="gastronomia.zonaCiudad"
+             maxlength="50"
+             placeholder="Macro centro | Costanera | Sur | Norte | Otro" />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Contacto y reservas</legend>
+
+    <div>
+      <label for="whatsapp">WhatsApp</label>
+      <input type="text" id="whatsapp" name="whatsapp"
+             [(ngModel)]="gastronomia.whatsapp"
+             maxlength="20" placeholder="342XXXXXXXX" />
+    </div>
+
+    <div>
+      <label for="linkReserva">Link de reserva</label>
+      <input type="text" id="linkReserva" name="linkReserva"
+             [(ngModel)]="gastronomia.linkReserva"
+             maxlength="200" placeholder="https://... o nombre de plataforma" />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Horarios</legend>
+
+    <div>
+      <label for="diasApertura">Días de apertura</label>
+      <input type="text" id="diasApertura" name="diasApertura"
+             [(ngModel)]="gastronomia.diasApertura"
+             maxlength="50"
+             placeholder="Lunes a viernes | Todos los días | Fines de semana" />
+    </div>
+
+    <div>
+      <label for="horarioApertura">Horario de apertura</label>
+      <input type="text" id="horarioApertura" name="horarioApertura"
+             [(ngModel)]="gastronomia.horarioApertura"
+             maxlength="50" placeholder="12:00 – 15:00 / 20:00 – 24:00" />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Observaciones</legend>
+    <div>
+      <label for="comentario">Comentario destacado</label>
+      <textarea id="comentario" name="comentario"
+                [(ngModel)]="gastronomia.comentario"
+                maxlength="300" rows="3"
+                placeholder="Ej: Especialidad en liso santafesino, pescado de río..."></textarea>
+    </div>
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar gastronomía') }}
+  </button>
+
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>

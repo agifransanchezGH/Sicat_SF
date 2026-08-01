@@ -1,0 +1,109 @@
+<h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Museo / Sala Cultural</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <fieldset>
+    <legend>Establecimiento</legend>
+    <div>
+      <label for="idEstab">ID de establecimiento *</label>
+      <input type="text" id="idEstab" name="idEstab"
+             [(ngModel)]="museo.idEstab"
+             [readonly]="modoEdicion"
+             required placeholder="SICAT-MUS-00001" />
+      <small>Debe corresponder a un establecimiento de categoría MUS ya creado.</small>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Clasificación</legend>
+
+    <div>
+      <label for="subcategoriaMuseo">Subcategoría</label>
+      <input type="text" id="subcategoriaMuseo" name="subcategoriaMuseo"
+             [(ngModel)]="museo.subcategoriaMuseo"
+             maxlength="100"
+             placeholder="Museo municipal | Sala de arte | Casa museo | Espacio patrimonial..." />
+    </div>
+
+    <div>
+      <label for="dominio">Dominio / Dependencia</label>
+      <select id="dominio" name="dominio" [(ngModel)]="museo.dominio">
+        <option [ngValue]="null">Sin datos</option>
+        <option *ngFor="let d of dominios" [value]="d">{{ d }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="funcionamiento">Estado de funcionamiento</label>
+      <select id="funcionamiento" name="funcionamiento" [(ngModel)]="museo.funcionamiento">
+        <option [ngValue]="null">Sin datos</option>
+        <option *ngFor="let f of funcionamientos" [value]="f">{{ f }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="tipoEntrada">Tipo de entrada</label>
+      <select id="tipoEntrada" name="tipoEntrada" [(ngModel)]="museo.tipoEntrada">
+        <option [ngValue]="null">Sin datos</option>
+        <option *ngFor="let t of tiposEntrada" [value]="t">{{ t }}</option>
+      </select>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Visitas y acceso</legend>
+
+    <div>
+      <label for="visitasGuiadas">Modalidad de visitas guiadas</label>
+      <input type="text" id="visitasGuiadas" name="visitasGuiadas"
+             [(ngModel)]="museo.visitasGuiadas"
+             maxlength="100"
+             placeholder="Sin turno | Con turno (WhatsApp) | Con turno (mail)..." />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Contenido</legend>
+
+    <div>
+      <label for="coleccionPrincipal">Colección o temática principal</label>
+      <input type="text" id="coleccionPrincipal" name="coleccionPrincipal"
+             [(ngModel)]="museo.coleccionPrincipal"
+             maxlength="100"
+             placeholder="Historia | Arte | Patrimonio natural | Fotografía | Teatro..." />
+    </div>
+
+    <div>
+      <label for="serviciosAdicionales">Servicios adicionales</label>
+      <input type="text" id="serviciosAdicionales" name="serviciosAdicionales"
+             [(ngModel)]="museo.serviciosAdicionales"
+             maxlength="300"
+             placeholder="Biblioteca | Tienda | Cafetería | Audioguía | QR informativo..." />
+    </div>
+
+    <div>
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion"
+                [(ngModel)]="museo.descripcion"
+                maxlength="500" rows="4"
+                placeholder="Descripción general del museo o sala cultural..."></textarea>
+    </div>
+
+    <div>
+      <label for="observacionesMuseo">Observaciones</label>
+      <textarea id="observacionesMuseo" name="observacionesMuseo"
+                [(ngModel)]="museo.observacionesMuseo"
+                maxlength="300" rows="2"
+                placeholder="Notas adicionales del relevador..."></textarea>
+    </div>
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar museo / sala cultural') }}
+  </button>
+
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>

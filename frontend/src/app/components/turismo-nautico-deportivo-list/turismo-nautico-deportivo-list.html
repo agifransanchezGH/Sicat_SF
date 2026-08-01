@@ -1,0 +1,32 @@
+<div class="list-container">
+  <h2>Turismo Náutico Deportivo</h2>
+
+  <div *ngIf="mensaje" class="mensaje-error">{{ mensaje }}</div>
+
+  <table *ngIf="turismos.length; else sinDatos">
+    <thead>
+      <tr>
+        <th>ID Estab</th>
+        <th>Subcategoría</th>
+        <th>Tipo</th>
+        <th>Puerto Base</th>
+        <th>Embarcaciones</th>
+        <th>Salida con Guía</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turismo of turismos">
+        <td>{{ turismo.idEstab }}</td>
+        <td>{{ turismo.subcategoriaNautica }}</td>
+        <td>{{ turismo.tipoNautico }}</td>
+        <td>{{ turismo.puertoBase }}</td>
+        <td>{{ turismo.embarcacionesCantidad }} {{ turismo.embarcacionesTipo }}</td>
+        <td>{{ turismo.salidaConGuia ? 'Sí' : 'No' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #sinDatos>
+    <p>No hay registros de turismo náutico deportivo disponibles.</p>
+  </ng-template>
+</div>

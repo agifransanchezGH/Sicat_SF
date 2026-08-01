@@ -7,6 +7,7 @@ import { AlojamientoFormComponent } from './components/alojamiento-form/alojamie
 import { SubcategoriaFormComponent } from './components/subcategoria-form/subcategoria-form';
 import { RelevamientoFormComponent } from './components/relevamiento-form/relevamiento-form';
 import { ContactoReferenteFormComponent } from './components/contacto-referente-form/contacto-referente-form';
+import { GastronomiaFormComponent } from './components/gastronomia-form/gastronomia-form';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'alojamiento/cargar',     component: AlojamientoFormComponent },
   { path: 'subcategoria/cargar', component: SubcategoriaFormComponent },
   { path: 'relevamiento/cargar', component: RelevamientoFormComponent},
-  { path: 'contacto-referente/cargar',     component: ContactoReferenteFormComponent }
+  { path: 'contacto-referente/cargar',     component: ContactoReferenteFormComponent },
+  { path: 'gastronomia/cargar',          component: GastronomiaFormComponent },
 ];

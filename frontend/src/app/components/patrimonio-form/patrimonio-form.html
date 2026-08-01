@@ -1,0 +1,110 @@
+<h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Patrimonio</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <fieldset>
+    <legend>Datos generales</legend>
+
+    <div>
+      <label for="idEstab">ID de establecimiento *</label>
+      <input id="idEstab" name="idEstab" type="text"
+             [(ngModel)]="patrimonio.idEstab"
+             [readonly]="modoEdicion"
+             placeholder="SICAT-PAT-00001"
+             required />
+    </div>
+
+    <div>
+      <label for="subcategoriaPatrimonio">Subcategoría</label>
+      <select id="subcategoriaPatrimonio" name="subcategoriaPatrimonio"
+              [(ngModel)]="patrimonio.subcategoriaPatrimonio">
+        <option value="">-- Seleccionar --</option>
+        <option *ngFor="let sub of subcategorias" [value]="sub">{{ sub }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="tipoPatrimonio">Tipo de patrimonio</label>
+      <select id="tipoPatrimonio" name="tipoPatrimonio"
+              [(ngModel)]="patrimonio.tipoPatrimonio">
+        <option value="">-- Seleccionar --</option>
+        <option *ngFor="let tipo of tiposPatrimonio" [value]="tipo">{{ tipo }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion"
+                [(ngModel)]="patrimonio.descripcion"
+                maxlength="500" rows="4"
+                placeholder="Descripción del patrimonio..."></textarea>
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="accesoPublico"
+               [(ngModel)]="patrimonio.accesoPublico" />
+        Acceso público
+      </label>
+    </div>
+
+    <div>
+      <label for="horarioVisitas">Horario de visitas</label>
+      <input id="horarioVisitas" name="horarioVisitas" type="text"
+             [(ngModel)]="patrimonio.horarioVisitas"
+             maxlength="150"
+             placeholder="Martes a domingo 10:00-18:00" />
+    </div>
+
+    <div>
+      <label for="valorCultural">Valor cultural</label>
+      <input id="valorCultural" name="valorCultural" type="text"
+             [(ngModel)]="patrimonio.valorCultural"
+             maxlength="200"
+             placeholder="Arqueológico | Histórico | Artístico" />
+    </div>
+  </fieldset>
+
+  <fieldset *ngIf="mostrarEspacioCultural()">
+    <legend>Datos de espacio cultural</legend>
+
+    <div>
+      <label for="espacioCulturalNombre">Nombre del espacio cultural</label>
+      <input id="espacioCulturalNombre" name="espacioCulturalNombre" type="text"
+             [(ngModel)]="patrimonio.espacioCulturalNombre"
+             maxlength="150"
+             placeholder="Centro Cultural Municipal" />
+    </div>
+
+    <div>
+      <label for="espacioCulturalCapacidad">Capacidad</label>
+      <input id="espacioCulturalCapacidad" name="espacioCulturalCapacidad" type="number"
+             [(ngModel)]="patrimonio.espacioCulturalCapacidad"
+             min="0" />
+    </div>
+
+    <div>
+      <label for="espacioCulturalServicios">Servicios del espacio cultural</label>
+      <input id="espacioCulturalServicios" name="espacioCulturalServicios" type="text"
+             [(ngModel)]="patrimonio.espacioCulturalServicios"
+             maxlength="250"
+             placeholder="Auditorio | Salas de exposición | Biblioteca" />
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="destinoEducativo"
+               [(ngModel)]="patrimonio.destinoEducativo" />
+        Destino educativo
+      </label>
+    </div>
+  </fieldset>
+
+  <button type="submit" [disabled]="cargando">
+    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar patrimonio') }}
+  </button>
+</form>
+
+<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
+  {{ mensaje }}
+</p>
