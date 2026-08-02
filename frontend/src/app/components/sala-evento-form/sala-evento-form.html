@@ -1,17 +1,15 @@
 <h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Sala de Evento</h2>
 
-<form (ngSubmit)="guardar()">
 
   <fieldset>
     <legend>Datos de la sala</legend>
 
     <div>
-      <label for="idEstab">ID de sala evento *</label>
+      <label for="idEstab">ID de sala evento</label>
       <input id="idEstab" name="idEstab" type="text"
-             [(ngModel)]="salaEvento.idEstab"
-             [readonly]="modoEdicion"
-             placeholder="SICAT-EVS-00001"
-             required />
+             [ngModel]="salaEvento.idEstab"
+             readonly
+             placeholder="Se asigna automáticamente" />
     </div>
 
     <div>
@@ -69,11 +67,6 @@
     </div>
 
   </fieldset>
-
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar sala de evento') }}
-  </button>
-</form>
 
 <p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
   {{ mensaje }}

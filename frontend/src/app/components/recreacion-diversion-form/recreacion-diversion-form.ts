@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { RecreacionDiversion } from '../../shared/models/recreacion-diversion.mo
 })
 export class RecreacionDiversionFormComponent implements OnInit {
 
+  private _idEstab = '';
   recreacion: RecreacionDiversion = { idEstab: '' };
   mensaje = '';
   exito = false;
@@ -22,6 +23,18 @@ export class RecreacionDiversionFormComponent implements OnInit {
 
   subcategorias = ['Parque acuático', 'Complejo deportivo', 'Club social', 'Centro de entretenimiento', 'Otro'];
   servicios = ['Acuático', 'Deportivo', 'Familiar', 'Infantil', 'Nocturno'];
+
+  @Input()
+  set idEstab(value: string) {
+    this._idEstab = value || '';
+    if (this._idEstab.trim()) {
+      this.recreacion.idEstab = this._idEstab;
+    }
+  }
+
+  get idEstab(): string {
+    return this._idEstab;
+  }
 
   constructor(
     private service: RecreacionDiversionService,
@@ -48,18 +61,24 @@ export class RecreacionDiversionFormComponent implements OnInit {
     });
   }
 
+  setIdEstab(idEstab: string): void {
+    this.idEstab = idEstab;
+  }
+
   guardar(): void {
-    if (!this.recreacion.idEstab?.trim()) {
+    const idEstab = (this.recreacion.idEstab || this._idEstab).trim();
+    if (!idEstab) {
       this.mensaje = 'El ID de establecimiento es obligatorio.';
       this.exito = false;
       return;
     }
 
+    this.recreacion.idEstab = idEstab;
     this.cargando = true;
     this.mensaje = '';
 
     const operacion = this.modoEdicion
-      ? this.service.actualizar(this.recreacion.idEstab, this.recreacion)
+      ? this.service.actualizar(idEstab, this.recreacion)
       : this.service.crear(this.recreacion);
 
     operacion.subscribe({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { MuseoSalaCultural } from '../../shared/models/museo-sala-cultural.model
 })
 export class MuseoSalaCulturalFormComponent implements OnInit {
 
+  private _idEstab = '';
   museo: MuseoSalaCultural = { idEstab: '' };
 
   mensaje = '';
@@ -25,6 +26,18 @@ export class MuseoSalaCulturalFormComponent implements OnInit {
   dominios      = ['Municipal', 'Provincial', 'Nacional', 'Privado', 'Mixto'];
   funcionamientos = ['Abierto', 'Cerrado', 'Temporario', 'En reformas'];
   tiposEntrada  = ['Gratuita', 'Con cargo', 'Entrada voluntaria', 'Mixta'];
+
+  @Input()
+  set idEstab(value: string) {
+    this._idEstab = value || '';
+    if (this._idEstab.trim()) {
+      this.museo.idEstab = this._idEstab;
+    }
+  }
+
+  get idEstab(): string {
+    return this._idEstab;
+  }
 
   constructor(
     private museoService: MuseoSalaCulturalService,
@@ -49,18 +62,24 @@ export class MuseoSalaCulturalFormComponent implements OnInit {
     });
   }
 
+  setIdEstab(idEstab: string): void {
+    this.idEstab = idEstab;
+  }
+
   guardar(): void {
-    if (!this.museo.idEstab.trim()) {
+    const idEstab = (this.museo.idEstab || this._idEstab).trim();
+    if (!idEstab) {
       this.mensaje = 'El ID de establecimiento es obligatorio.';
       this.exito = false;
       return;
     }
 
+    this.museo.idEstab = idEstab;
     this.cargando = true;
     this.mensaje = '';
 
     const op$ = this.modoEdicion
-      ? this.museoService.actualizar(this.museo.idEstab, this.museo)
+      ? this.museoService.actualizar(idEstab, this.museo)
       : this.museoService.crear(this.museo);
 
     op$.subscribe({

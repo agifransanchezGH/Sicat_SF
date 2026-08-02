@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -14,12 +14,25 @@ import { Gastronomia } from '../../shared/models/gastronomia.model';
 })
 export class GastronomiaFormComponent implements OnInit {
 
+  private _idEstab = '';
   gastronomia: Gastronomia = { idEstab: '' };
 
   mensaje = '';
   exito = false;
   cargando = false;
   modoEdicion = false;
+
+  @Input()
+  set idEstab(value: string) {
+    this._idEstab = value || '';
+    if (this._idEstab.trim()) {
+      this.gastronomia.idEstab = this._idEstab;
+    }
+  }
+
+  get idEstab(): string {
+    return this._idEstab;
+  }
 
   constructor(
     private gastronomiaService: GastronomiaService,
@@ -44,18 +57,24 @@ export class GastronomiaFormComponent implements OnInit {
     });
   }
 
+  setIdEstab(idEstab: string): void {
+    this.idEstab = idEstab;
+  }
+
   guardar(): void {
-    if (!this.gastronomia.idEstab.trim()) {
+    const idEstab = (this.gastronomia.idEstab || this._idEstab).trim();
+    if (!idEstab) {
       this.mensaje = 'El ID de establecimiento es obligatorio.';
       this.exito = false;
       return;
     }
 
+    this.gastronomia.idEstab = idEstab;
     this.cargando = true;
     this.mensaje = '';
 
     const op$ = this.modoEdicion
-      ? this.gastronomiaService.actualizar(this.gastronomia.idEstab, this.gastronomia)
+      ? this.gastronomiaService.actualizar(idEstab, this.gastronomia)
       : this.gastronomiaService.crear(this.gastronomia);
 
     op$.subscribe({

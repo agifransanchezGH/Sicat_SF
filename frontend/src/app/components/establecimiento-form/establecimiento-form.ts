@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { EstablecimientoService } from '../../shared/services/establecimiento.service';
@@ -50,6 +50,15 @@ export class EstablecimientoFormComponent implements OnInit {
   mensaje = '';
   exito = false;
   cargando = false;
+  @ViewChild(AlojamientoFormComponent) alojamientoForm?: AlojamientoFormComponent;
+  @ViewChild(GastronomiaFormComponent) gastronomiaForm?: GastronomiaFormComponent;
+  @ViewChild(MuseoSalaCulturalFormComponent) museoSalaCulturalForm?: MuseoSalaCulturalFormComponent;
+  @ViewChild(SalaEventoFormComponent) salaEventoForm?: SalaEventoFormComponent;
+  @ViewChild(RecreacionDiversionFormComponent) recreacionDiversionForm?: RecreacionDiversionFormComponent;
+  @ViewChild(PatrimonioFormComponent) patrimonioForm?: PatrimonioFormComponent;
+  @ViewChild(ServicioTuristicoFormComponent) servicioTuristicoForm?: ServicioTuristicoFormComponent;
+  @ViewChild(TurismoNauticoDeportivoFormComponent) turismoNauticoForm?: TurismoNauticoDeportivoFormComponent;
+
   constructor(
     private establecimientoService: EstablecimientoService,
     private categoriaService: CategoriaService,
@@ -86,9 +95,15 @@ export class EstablecimientoFormComponent implements OnInit {
 
     this.establecimientoService.crear(this.establecimiento).subscribe({
       next: (respuesta) => {
-        this.mensaje = `Establecimiento guardado con ID ${respuesta.idEstab}`;
+        const idEstab = respuesta.idEstab;
+        this.mensaje = idEstab
+          ? `Establecimiento guardado con ID ${idEstab}`
+          : 'Establecimiento guardado correctamente';
         this.exito = true;
         this.cargando = false;
+        if (idEstab) {
+          this.procesarDetalleRelacionado(idEstab);
+        }
         this.limpiarFormulario();
       },
       error: (err) => {
@@ -98,6 +113,46 @@ export class EstablecimientoFormComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  private procesarDetalleRelacionado(idEstab: string): void {
+    switch (this.establecimiento.idCat) {
+      case 1:
+      case 2:
+        this.alojamientoForm?.setIdEstab(idEstab);
+        this.alojamientoForm?.guardar();
+        break;
+      case 3:
+        this.gastronomiaForm?.setIdEstab(idEstab);
+        this.gastronomiaForm?.guardar();
+        break;
+      case 4:
+        this.museoSalaCulturalForm?.setIdEstab(idEstab);
+        this.museoSalaCulturalForm?.guardar();
+        break;
+      case 5:
+        this.salaEventoForm?.setIdEstab(idEstab);
+        this.salaEventoForm?.guardar();
+        break;
+      case 6:
+        this.recreacionDiversionForm?.setIdEstab(idEstab);
+        this.recreacionDiversionForm?.guardar();
+        break;
+      case 7:
+        this.patrimonioForm?.setIdEstab(idEstab);
+        this.patrimonioForm?.guardar();
+        break;
+      case 8:
+        this.servicioTuristicoForm?.setIdEstab(idEstab);
+        this.servicioTuristicoForm?.guardar();
+        break;
+      case 9:
+        this.turismoNauticoForm?.setIdEstab(idEstab);
+        this.turismoNauticoForm?.guardar();
+        break;
+      default:
+        break;
+    }
   }
 
   private limpiarFormulario(): void {

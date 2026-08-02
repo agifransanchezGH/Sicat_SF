@@ -1,17 +1,15 @@
-<h2>Cargar Nueva Categoría</h2>
+<app-form-shell [title]="'Cargar Nueva Categoría'" [feedback]="mensaje">
+  <form (ngSubmit)="guardar()">
+    <div>
+      <label for="prefijo">Prefijo:</label>
+      <input type="text" id="prefijo" name="prefijo" [(ngModel)]="categoria.prefijo" required maxlength="5" />
+    </div>
 
-<form (ngSubmit)="guardar()">
-  <div>
-    <label for="prefijo">Prefijo:</label>
-    <input type="text" id="prefijo" name="prefijo" [(ngModel)]="categoria.prefijo" required maxlength="5" />
-  </div>
+    <div>
+      <label for="nombreCategoria">Nombre:</label>
+      <input type="text" id="nombreCategoria" name="nombreCategoria" [(ngModel)]="categoria.nombreCategoria" required maxlength="100" />
+    </div>
 
-  <div>
-    <label for="nombreCategoria">Nombre:</label>
-    <input type="text" id="nombreCategoria" name="nombreCategoria" [(ngModel)]="categoria.nombreCategoria" required maxlength="100" />
-  </div>
-
-  <button type="submit">Guardar</button>
-</form>
-
-<p *ngIf="mensaje">{{ mensaje }}</p>
+    <button type="submit">Guardar</button>
+  </form>
+</app-form-shell>

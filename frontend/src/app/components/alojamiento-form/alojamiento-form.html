@@ -1,18 +1,16 @@
 <h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Detalle de Alojamiento</h2>
 
-<form (ngSubmit)="guardar()">
 
   <!-- ID del establecimiento -->
   <fieldset>
     <legend>Establecimiento</legend>
     <div>
-      <label for="idEstab">ID de establecimiento *</label>
+      <label for="idEstab">ID de establecimiento</label>
       <input type="text" id="idEstab" name="idEstab"
-             [(ngModel)]="alojamiento.idEstab"
-             [readonly]="modoEdicion"
-             required
-             placeholder="SICAT-HOT-00001" />
-      <small>Debe corresponder a un establecimiento de categoría HOT o DEL ya creado.</small>
+             [ngModel]="alojamiento.idEstab"
+             readonly
+             placeholder="Se asigna automáticamente" />
+      <small>Se completa con el establecimiento que se está cargando.</small>
     </div>
   </fieldset>
 
@@ -133,12 +131,6 @@
       <small>Separar con | (pipe)</small>
     </div>
   </fieldset>
-
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar alojamiento') }}
-  </button>
-
-</form>
 
 <p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
   {{ mensaje }}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -14,11 +14,24 @@ import { SalaEvento } from '../../shared/models/sala-evento.model';
 })
 export class SalaEventoFormComponent implements OnInit {
 
+  private _idEstab = '';
   salaEvento: SalaEvento = { idEstab: '' };
   mensaje = '';
   exito = false;
   cargando = false;
   modoEdicion = false;
+
+  @Input()
+  set idEstab(value: string) {
+    this._idEstab = value || '';
+    if (this._idEstab.trim()) {
+      this.salaEvento.idEstab = this._idEstab;
+    }
+  }
+
+  get idEstab(): string {
+    return this._idEstab;
+  }
 
   constructor(
     private salaEventoService: SalaEventoService,
@@ -45,18 +58,24 @@ export class SalaEventoFormComponent implements OnInit {
     });
   }
 
+  setIdEstab(idEstab: string): void {
+    this.idEstab = idEstab;
+  }
+
   guardar(): void {
-    if (!this.salaEvento.idEstab?.trim()) {
+    const idEstab = (this.salaEvento.idEstab || this._idEstab).trim();
+    if (!idEstab) {
       this.mensaje = 'El ID de sala evento es obligatorio.';
       this.exito = false;
       return;
     }
 
+    this.salaEvento.idEstab = idEstab;
     this.cargando = true;
     this.mensaje = '';
 
     const operacion = this.modoEdicion
-      ? this.salaEventoService.actualizar(this.salaEvento.idEstab, this.salaEvento)
+      ? this.salaEventoService.actualizar(idEstab, this.salaEvento)
       : this.salaEventoService.crear(this.salaEvento);
 
     operacion.subscribe({

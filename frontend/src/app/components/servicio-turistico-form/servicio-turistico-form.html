@@ -1,154 +1,128 @@
-<h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Servicio Turístico</h2>
+<app-form-shell [title]="modoEdicion ? 'Editar Servicio Turístico' : 'Cargar Servicio Turístico'" [feedback]="mensaje">
+    <fieldset>
+      <legend>Datos generales</legend>
+      <div>
+        <label for="idEstab">ID de establecimiento</label>
+        <input id="idEstab" name="idEstab" type="text"
+               [ngModel]="servicio.idEstab"
+               readonly
+               placeholder="Se asigna automáticamente" />
+      </div>
+      <div>
+        <label for="subcategoriaServicio">Subcategoría</label>
+        <select id="subcategoriaServicio" name="subcategoriaServicio"
+                [(ngModel)]="servicio.subcategoriaServicio">
+          <option value="">-- Seleccionar --</option>
+          <option *ngFor="let sub of subcategorias" [value]="sub">{{ sub }}</option>
+        </select>
+      </div>
+      <div>
+        <label for="nombreServicio">Nombre del servicio</label>
+        <input id="nombreServicio" name="nombreServicio" type="text"
+               [(ngModel)]="servicio.nombreServicio"
+               maxlength="150"
+               placeholder="Agencia Plaza | Transfer VIP | Bus City Tour" />
+      </div>
+      <div>
+        <label for="tipoServicio">Tipo de servicio</label>
+        <select id="tipoServicio" name="tipoServicio"
+                [(ngModel)]="servicio.tipoServicio">
+          <option value="">-- Seleccionar --</option>
+          <option *ngFor="let tipo of tiposServicio" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+    </fieldset>
 
-<form (ngSubmit)="guardar()">
+    <fieldset>
+      <legend>Contacto y descripción</legend>
+      <div>
+        <label for="contacto">Contacto</label>
+        <input id="contacto" name="contacto" type="text"
+               [(ngModel)]="servicio.contacto"
+               maxlength="150"
+               placeholder="Teléfono / WhatsApp / Email" />
+      </div>
+      <div>
+        <label for="linkReserva">Link de reserva</label>
+        <input id="linkReserva" name="linkReserva" type="text"
+               [(ngModel)]="servicio.linkReserva"
+               maxlength="200"
+               placeholder="https://..." />
+      </div>
+      <div>
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion"
+                  [(ngModel)]="servicio.descripcion"
+                  maxlength="500" rows="4"
+                  placeholder="Descripción breve del servicio..."></textarea>
+      </div>
+    </fieldset>
 
-  <fieldset>
-    <legend>Datos generales</legend>
+    <fieldset *ngIf="necesitaVehiculo()">
+      <legend>Datos de transporte</legend>
+      <div>
+        <label for="vehiculoTipo">Tipo de vehículo</label>
+        <input id="vehiculoTipo" name="vehiculoTipo" type="text"
+               [(ngModel)]="servicio.vehiculoTipo"
+               maxlength="100"
+               placeholder="Minibus | Colectivo | Van | Auto" />
+      </div>
+      <div>
+        <label for="zonaCobertura">Zona de cobertura</label>
+        <input id="zonaCobertura" name="zonaCobertura" type="text"
+               [(ngModel)]="servicio.zonaCobertura"
+               maxlength="150"
+               placeholder="Ciudad | Costa | Circuito histórico" />
+      </div>
+    </fieldset>
 
-    <div>
-      <label for="idEstab">ID de establecimiento *</label>
-      <input id="idEstab" name="idEstab" type="text"
-             [(ngModel)]="servicio.idEstab"
-             [readonly]="modoEdicion"
-             placeholder="SICAT-SVT-00001"
-             required />
-    </div>
+    <fieldset *ngIf="necesitaRamal()">
+      <legend>Datos de bus turístico</legend>
+      <div>
+        <label for="lineas">Líneas</label>
+        <input id="lineas" name="lineas" type="text"
+               [(ngModel)]="servicio.lineas"
+               maxlength="200"
+               placeholder="Línea 1 / Línea 2" />
+      </div>
+      <div>
+        <label for="tipoRamal">Tipo de ramal</label>
+        <input id="tipoRamal" name="tipoRamal" type="text"
+               [(ngModel)]="servicio.tipoRamal"
+               maxlength="100"
+               placeholder="Ramal corto | Ramal largo" />
+      </div>
+      <div>
+        <label for="frecuencia">Frecuencia</label>
+        <input id="frecuencia" name="frecuencia" type="text"
+               [(ngModel)]="servicio.frecuencia"
+               maxlength="100"
+               placeholder="Cada 30 min | Diario | Semanal" />
+      </div>
+    </fieldset>
 
-    <div>
-      <label for="subcategoriaServicio">Subcategoría</label>
-      <select id="subcategoriaServicio" name="subcategoriaServicio"
-              [(ngModel)]="servicio.subcategoriaServicio">
-        <option value="">-- Seleccionar --</option>
-        <option *ngFor="let sub of subcategorias" [value]="sub">{{ sub }}</option>
-      </select>
-    </div>
+    <fieldset>
+      <legend>Programas y acreditaciones</legend>
+      <div>
+        <label for="programasOfrecidos">Programas ofrecidos</label>
+        <input id="programasOfrecidos" name="programasOfrecidos" type="text"
+               [(ngModel)]="servicio.programasOfrecidos"
+               maxlength="300"
+               placeholder="Paseos, excursiones, traslados, paquetes" />
+      </div>
+      <div>
+        <label for="acreditaciones">Acreditaciones</label>
+        <input id="acreditaciones" name="acreditaciones" type="text"
+               [(ngModel)]="servicio.acreditaciones"
+               maxlength="300"
+               placeholder="Afiliado a XXX | Asociación Y" />
+      </div>
+      <div>
+        <label for="cantidadAsesores">Cantidad de asesores</label>
+        <input id="cantidadAsesores" name="cantidadAsesores" type="number"
+               [(ngModel)]="servicio.cantidadAsesores"
+               min="0" />
+      </div>
+    </fieldset>
 
-    <div>
-      <label for="nombreServicio">Nombre del servicio</label>
-      <input id="nombreServicio" name="nombreServicio" type="text"
-             [(ngModel)]="servicio.nombreServicio"
-             maxlength="150"
-             placeholder="Agencia Plaza | Transfer VIP | Bus City Tour" />
-    </div>
-
-    <div>
-      <label for="tipoServicio">Tipo de servicio</label>
-      <select id="tipoServicio" name="tipoServicio"
-              [(ngModel)]="servicio.tipoServicio">
-        <option value="">-- Seleccionar --</option>
-        <option *ngFor="let tipo of tiposServicio" [value]="tipo">{{ tipo }}</option>
-      </select>
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <legend>Contacto y descripción</legend>
-
-    <div>
-      <label for="contacto">Contacto</label>
-      <input id="contacto" name="contacto" type="text"
-             [(ngModel)]="servicio.contacto"
-             maxlength="150"
-             placeholder="Teléfono / WhatsApp / Email" />
-    </div>
-
-    <div>
-      <label for="linkReserva">Link de reserva</label>
-      <input id="linkReserva" name="linkReserva" type="text"
-             [(ngModel)]="servicio.linkReserva"
-             maxlength="200"
-             placeholder="https://..." />
-    </div>
-
-    <div>
-      <label for="descripcion">Descripción</label>
-      <textarea id="descripcion" name="descripcion"
-                [(ngModel)]="servicio.descripcion"
-                maxlength="500" rows="4"
-                placeholder="Descripción breve del servicio..."></textarea>
-    </div>
-  </fieldset>
-
-  <fieldset *ngIf="necesitaVehiculo()">
-    <legend>Datos de transporte</legend>
-
-    <div>
-      <label for="vehiculoTipo">Tipo de vehículo</label>
-      <input id="vehiculoTipo" name="vehiculoTipo" type="text"
-             [(ngModel)]="servicio.vehiculoTipo"
-             maxlength="100"
-             placeholder="Minibus | Colectivo | Van | Auto" />
-    </div>
-
-    <div>
-      <label for="zonaCobertura">Zona de cobertura</label>
-      <input id="zonaCobertura" name="zonaCobertura" type="text"
-             [(ngModel)]="servicio.zonaCobertura"
-             maxlength="150"
-             placeholder="Ciudad | Costa | Circuito histórico" />
-    </div>
-  </fieldset>
-
-  <fieldset *ngIf="necesitaRamal()">
-    <legend>Datos de bus turístico</legend>
-
-    <div>
-      <label for="lineas">Líneas</label>
-      <input id="lineas" name="lineas" type="text"
-             [(ngModel)]="servicio.lineas"
-             maxlength="200"
-             placeholder="Línea 1 / Línea 2" />
-    </div>
-
-    <div>
-      <label for="tipoRamal">Tipo de ramal</label>
-      <input id="tipoRamal" name="tipoRamal" type="text"
-             [(ngModel)]="servicio.tipoRamal"
-             maxlength="100"
-             placeholder="Ramal corto | Ramal largo" />
-    </div>
-
-    <div>
-      <label for="frecuencia">Frecuencia</label>
-      <input id="frecuencia" name="frecuencia" type="text"
-             [(ngModel)]="servicio.frecuencia"
-             maxlength="100"
-             placeholder="Cada 30 min | Diario | Semanal" />
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <legend>Programas y acreditaciones</legend>
-
-    <div>
-      <label for="programasOfrecidos">Programas ofrecidos</label>
-      <input id="programasOfrecidos" name="programasOfrecidos" type="text"
-             [(ngModel)]="servicio.programasOfrecidos"
-             maxlength="300"
-             placeholder="Paseos, excursiones, traslados, paquetes" />
-    </div>
-
-    <div>
-      <label for="acreditaciones">Acreditaciones</label>
-      <input id="acreditaciones" name="acreditaciones" type="text"
-             [(ngModel)]="servicio.acreditaciones"
-             maxlength="300"
-             placeholder="Afiliado a XXX | Asociación Y" />
-    </div>
-
-    <div>
-      <label for="cantidadAsesores">Cantidad de asesores</label>
-      <input id="cantidadAsesores" name="cantidadAsesores" type="number"
-             [(ngModel)]="servicio.cantidadAsesores"
-             min="0" />
-    </div>
-  </fieldset>
-
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar servicio turístico') }}
-  </button>
-</form>
-
-<p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
-  {{ mensaje }}
-</p>
+</app-form-shell>

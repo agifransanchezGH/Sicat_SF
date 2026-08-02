@@ -1,16 +1,15 @@
 <h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Detalle de Gastronomía</h2>
 
-<form (ngSubmit)="guardar()">
 
   <fieldset>
     <legend>Establecimiento</legend>
     <div>
-      <label for="idEstab">ID de establecimiento *</label>
+      <label for="idEstab">ID de establecimiento</label>
       <input type="text" id="idEstab" name="idEstab"
-             [(ngModel)]="gastronomia.idEstab"
-             [readonly]="modoEdicion"
-             required placeholder="SICAT-GAS-00001" />
-      <small>Debe corresponder a un establecimiento de categoría GAS ya creado.</small>
+             [ngModel]="gastronomia.idEstab"
+             readonly
+             placeholder="Se asigna automáticamente" />
+      <small>Se completa con el establecimiento que se está cargando.</small>
     </div>
   </fieldset>
 
@@ -89,12 +88,6 @@
                 placeholder="Ej: Especialidad en liso santafesino, pescado de río..."></textarea>
     </div>
   </fieldset>
-
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar gastronomía') }}
-  </button>
-
-</form>
 
 <p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
   {{ mensaje }}

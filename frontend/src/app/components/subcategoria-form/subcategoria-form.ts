@@ -5,11 +5,12 @@ import { SubcategoriaService } from '../../shared/services/subcategoria.service'
 import { CategoriaService } from '../../shared/services/categoria.service';
 import { Subcategoria } from '../../shared/models/subcategoria.model';
 import { Categoria } from '../../shared/models/categoria.model';
+import { FormShellComponent } from '../../shared/components/form-shell/form-shell';
 
 @Component({
   selector: 'app-subcategoria-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, FormShellComponent],
   templateUrl: './subcategoria-form.html',
   styleUrl: './subcategoria-form.css'
 })

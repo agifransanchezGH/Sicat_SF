@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ServicioTuristicoService } from '../../shared/services/servicio-turistico.service';
 import { ServicioTuristico } from '../../shared/models/servicio-turistico.model';
+import { FormShellComponent } from '../../shared/components/form-shell/form-shell';
 
 @Component({
   selector: 'app-servicio-turistico-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FormShellComponent],
   templateUrl: './servicio-turistico-form.html',
   styleUrl: './servicio-turistico-form.css'
 })
 export class ServicioTuristicoFormComponent implements OnInit {
 
+  private _idEstab = '';
   servicio: ServicioTuristico = { idEstab: '' };
   mensaje = '';
   exito = false;
@@ -22,6 +24,18 @@ export class ServicioTuristicoFormComponent implements OnInit {
 
   subcategorias = ['Agencia de viajes', 'Transfer', 'Bus turístico', 'Guía local', 'Otro'];
   tiposServicio = ['Agencias', 'Transfers', 'Bus', 'Guías'];
+
+  @Input()
+  set idEstab(value: string) {
+    this._idEstab = value || '';
+    if (this._idEstab.trim()) {
+      this.servicio.idEstab = this._idEstab;
+    }
+  }
+
+  get idEstab(): string {
+    return this._idEstab;
+  }
 
   constructor(
     private servicioService: ServicioTuristicoService,
@@ -48,18 +62,24 @@ export class ServicioTuristicoFormComponent implements OnInit {
     });
   }
 
+  setIdEstab(idEstab: string): void {
+    this.idEstab = idEstab;
+  }
+
   guardar(): void {
-    if (!this.servicio.idEstab?.trim()) {
+    const idEstab = (this.servicio.idEstab || this._idEstab).trim();
+    if (!idEstab) {
       this.mensaje = 'El ID de establecimiento es obligatorio.';
       this.exito = false;
       return;
     }
 
+    this.servicio.idEstab = idEstab;
     this.cargando = true;
     this.mensaje = '';
 
     const operacion = this.modoEdicion
-      ? this.servicioService.actualizar(this.servicio.idEstab, this.servicio)
+      ? this.servicioService.actualizar(idEstab, this.servicio)
       : this.servicioService.crear(this.servicio);
 
     operacion.subscribe({

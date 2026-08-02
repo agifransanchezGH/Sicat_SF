@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CategoriaService } from '../../shared/services/categoria.service';
 import { Categoria } from '../../shared/models/categoria.model';
 import { CommonModule } from '@angular/common';
+import { FormShellComponent } from '../../shared/components/form-shell/form-shell';
 @Component({
   selector: 'app-categoria-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, FormShellComponent],
   templateUrl: './categoria-form.html',
   styleUrl: './categoria-form.css'
 })

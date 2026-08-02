@@ -1,16 +1,15 @@
 <h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Museo / Sala Cultural</h2>
 
-<form (ngSubmit)="guardar()">
 
   <fieldset>
     <legend>Establecimiento</legend>
     <div>
-      <label for="idEstab">ID de establecimiento *</label>
+      <label for="idEstab">ID de establecimiento</label>
       <input type="text" id="idEstab" name="idEstab"
-             [(ngModel)]="museo.idEstab"
-             [readonly]="modoEdicion"
-             required placeholder="SICAT-MUS-00001" />
-      <small>Debe corresponder a un establecimiento de categoría MUS ya creado.</small>
+             [ngModel]="museo.idEstab"
+             readonly
+             placeholder="Se asigna automáticamente" />
+      <small>Se completa con el establecimiento que se está cargando.</small>
     </div>
   </fieldset>
 
@@ -97,12 +96,6 @@
                 placeholder="Notas adicionales del relevador..."></textarea>
     </div>
   </fieldset>
-
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar museo / sala cultural') }}
-  </button>
-
-</form>
 
 <p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
   {{ mensaje }}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { Patrimonio } from '../../shared/models/patrimonio.model';
 })
 export class PatrimonioFormComponent implements OnInit {
 
+  private _idEstab = '';
   patrimonio: Patrimonio = { idEstab: '' };
   mensaje = '';
   exito = false;
@@ -22,6 +23,18 @@ export class PatrimonioFormComponent implements OnInit {
 
   subcategorias = ['Patrimonio material', 'Patrimonio inmaterial', 'Sitio arqueológico', 'Museo histórico', 'Otro'];
   tiposPatrimonio = ['Museo', 'Monumento', 'Ruta cultural', 'Sitio memorial', 'Paisaje cultural'];
+
+  @Input()
+  set idEstab(value: string) {
+    this._idEstab = value || '';
+    if (this._idEstab.trim()) {
+      this.patrimonio.idEstab = this._idEstab;
+    }
+  }
+
+  get idEstab(): string {
+    return this._idEstab;
+  }
 
   constructor(
     private patrimonioService: PatrimonioService,
@@ -48,18 +61,24 @@ export class PatrimonioFormComponent implements OnInit {
     });
   }
 
+  setIdEstab(idEstab: string): void {
+    this.idEstab = idEstab;
+  }
+
   guardar(): void {
-    if (!this.patrimonio.idEstab?.trim()) {
+    const idEstab = (this.patrimonio.idEstab || this._idEstab).trim();
+    if (!idEstab) {
       this.mensaje = 'El ID de establecimiento es obligatorio.';
       this.exito = false;
       return;
     }
 
+    this.patrimonio.idEstab = idEstab;
     this.cargando = true;
     this.mensaje = '';
 
     const operacion = this.modoEdicion
-      ? this.patrimonioService.actualizar(this.patrimonio.idEstab, this.patrimonio)
+      ? this.patrimonioService.actualizar(idEstab, this.patrimonio)
       : this.patrimonioService.crear(this.patrimonio);
 
     operacion.subscribe({

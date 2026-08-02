@@ -1,17 +1,15 @@
 <h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Patrimonio</h2>
 
-<form (ngSubmit)="guardar()">
 
   <fieldset>
     <legend>Datos generales</legend>
 
     <div>
-      <label for="idEstab">ID de establecimiento *</label>
+      <label for="idEstab">ID de establecimiento</label>
       <input id="idEstab" name="idEstab" type="text"
-             [(ngModel)]="patrimonio.idEstab"
-             [readonly]="modoEdicion"
-             placeholder="SICAT-PAT-00001"
-             required />
+             [ngModel]="patrimonio.idEstab"
+             readonly
+             placeholder="Se asigna automáticamente" />
     </div>
 
     <div>
@@ -99,11 +97,6 @@
       </label>
     </div>
   </fieldset>
-
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar patrimonio') }}
-  </button>
-</form>
 
 <p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
   {{ mensaje }}

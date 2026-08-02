@@ -1,17 +1,15 @@
 <h2>{{ modoEdicion ? 'Editar' : 'Cargar' }} Recreación / Diversión</h2>
 
-<form (ngSubmit)="guardar()">
 
   <fieldset>
     <legend>Datos generales</legend>
 
     <div>
-      <label for="idEstab">ID de establecimiento *</label>
+      <label for="idEstab">ID de establecimiento</label>
       <input id="idEstab" name="idEstab" type="text"
-             [(ngModel)]="recreacion.idEstab"
-             [readonly]="modoEdicion"
-             placeholder="SICAT-REC-00001"
-             required />
+             [ngModel]="recreacion.idEstab"
+             readonly
+             placeholder="Se asigna automáticamente" />
     </div>
 
     <div>
@@ -115,11 +113,6 @@
                 placeholder="Finalidades, restricciones, servicios adicionales..."></textarea>
     </div>
   </fieldset>
-
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : (modoEdicion ? 'Actualizar' : 'Guardar recreación/diversión') }}
-  </button>
-</form>
 
 <p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">
   {{ mensaje }}

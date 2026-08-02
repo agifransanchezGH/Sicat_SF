@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -14,12 +14,25 @@ import { Alojamiento } from '../../shared/models/alojamiento.model';
 })
 export class AlojamientoFormComponent implements OnInit {
 
+  private _idEstab = '';
   alojamiento: Alojamiento = { idEstab: '' };
 
   mensaje = '';
   exito = false;
   cargando = false;
   modoEdicion = false;
+
+  @Input()
+  set idEstab(value: string) {
+    this._idEstab = value || '';
+    if (this._idEstab.trim()) {
+      this.alojamiento.idEstab = this._idEstab;
+    }
+  }
+
+  get idEstab(): string {
+    return this._idEstab;
+  }
 
   constructor(
     private alojamientoService: AlojamientoService,
@@ -47,18 +60,24 @@ export class AlojamientoFormComponent implements OnInit {
     });
   }
 
+  setIdEstab(idEstab: string): void {
+    this.idEstab = idEstab;
+  }
+
   guardar(): void {
-    if (!this.alojamiento.idEstab.trim()) {
+    const idEstab = (this.alojamiento.idEstab || this._idEstab).trim();
+    if (!idEstab) {
       this.mensaje = 'El ID de establecimiento es obligatorio';
       this.exito = false;
       return;
     }
 
+    this.alojamiento.idEstab = idEstab;
     this.cargando = true;
     this.mensaje = '';
 
     const operacion$ = this.modoEdicion
-      ? this.alojamientoService.actualizar(this.alojamiento.idEstab, this.alojamiento)
+      ? this.alojamientoService.actualizar(idEstab, this.alojamiento)
       : this.alojamientoService.crear(this.alojamiento);
 
     operacion$.subscribe({
