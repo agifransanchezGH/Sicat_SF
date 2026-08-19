@@ -1,11 +1,34 @@
-<h2>Cargar Nuevo Establecimiento</h2>
+<section class="form-page-header">
+  <div>
+    <p class="eyebrow">Nuevo registro turístico</p>
+    <h1>Cargar establecimiento</h1>
+    <p class="intro">Completá los datos generales y luego agregá la información específica de su categoría.</p>
+  </div>
+  <div class="record-badge" aria-label="Estado del registro">
+    <span class="status-dot"></span>
+    <span>Borrador</span>
+  </div>
+</section>
+
+<div class="progress-steps" aria-label="Progreso del formulario">
+  <div class="progress-step is-active">
+    <span class="step-number">1</span>
+    <span><strong>Datos generales</strong><small>Identidad y ubicación</small></span>
+  </div>
+  <div class="progress-line" [class.is-complete]="establecimiento.idCat !== -1"></div>
+  <div class="progress-step" [class.is-active]="establecimiento.idCat !== -1">
+    <span class="step-number">2</span>
+    <span><strong>Detalle de categoría</strong><small>{{ categoriaSeleccionada?.nombreCategoria || 'Elegí una categoría' }}</small></span>
+  </div>
+</div>
 
 <form (ngSubmit)="guardar()">
   <!-- SECCIÓN: Clasificación -->
-  <fieldset>
-    <legend>Clasificación</legend>
+  <fieldset class="form-section">
+    <legend><span class="section-index">01</span> Identidad y clasificación</legend>
+    <p class="section-description">Definí cómo se identifica este establecimiento dentro del sistema.</p>
 
-      <div>
+      <div class="field">
       <label for="nombre">Nombre *</label>
       <input
         type="text"
@@ -17,7 +40,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="idCat">Categoría *</label>
       <select id="idCat" name="idCat" [(ngModel)]="establecimiento.idCat" (change)="onCategoriaChange()" required>
         <option [ngValue]="-1" disabled>Seleccioná una categoría</option>
@@ -25,11 +48,11 @@
           {{ cat.nombreCategoria }}
         </option>
       </select>
-      <p>idCat seleccionado: {{ establecimiento.idCat }}</p>
+      <small class="field-hint">La categoría determina el formulario específico que aparecerá debajo.</small>
     </div>
 
 
-    <div>
+    <div class="field">
       <label for="idSubcat">Subcategoría</label>
       <select id="idSubcat" name="idSubcat" [(ngModel)]="establecimiento.idSubcat">
         <option [ngValue]="null">Sin especificar</option>
@@ -40,7 +63,7 @@
     </div>
 
 
-    <div>
+    <div class="field">
       <label for="estado">Estado</label>
       <input
         type="text"
@@ -66,10 +89,11 @@
   </fieldset>
 
   <!-- SECCIÓN: Ubicación -->
-  <fieldset>
-    <legend>Ubicación</legend>
+  <fieldset class="form-section">
+    <legend><span class="section-index">02</span> Ubicación</legend>
+    <p class="section-description">Indicá dónde se encuentra el establecimiento.</p>
 
-    <div>
+    <div class="field">
       <label for="direccion">Dirección</label>
       <input
         type="text"
@@ -82,10 +106,11 @@
   </fieldset>
 
   <!-- SECCIÓN: Contacto -->
-  <fieldset>
-    <legend>Contacto</legend>
+  <fieldset class="form-section">
+    <legend><span class="section-index">03</span> Contacto</legend>
+    <p class="section-description">Estos datos facilitan la comunicación y las consultas.</p>
 
-    <div>
+    <div class="field">
       <label for="telFijo">Teléfono fijo</label>
       <input
         type="text"
@@ -97,7 +122,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="telMovil">Teléfono móvil</label>
       <input
         type="text"
@@ -109,7 +134,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="whatsapp">WhatsApp</label>
       <input
         type="text"
@@ -121,7 +146,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="correo">Correo electrónico</label>
       <input
         type="email"
@@ -134,10 +159,11 @@
   </fieldset>
 
   <!-- SECCIÓN: Presencia digital -->
-  <fieldset>
-    <legend>Presencia digital</legend>
+  <fieldset class="form-section">
+    <legend><span class="section-index">04</span> Presencia digital</legend>
+    <p class="section-description">Registrá los canales digitales utilizados por el establecimiento.</p>
 
-    <div>
+    <div class="field">
       <label for="web">Sitio web</label>
       <input
         type="text"
@@ -149,7 +175,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="instagram">Instagram</label>
       <input
         type="text"
@@ -161,7 +187,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="facebook">Facebook</label>
       <input
         type="text"
@@ -172,7 +198,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="redesSociales">Redes sociales que utiliza</label>
       <input
         type="text"
@@ -186,10 +212,11 @@
   </fieldset>
 
   <!-- SECCIÓN: Personal -->
-  <fieldset>
-    <legend>Personal</legend>
+  <fieldset class="form-section">
+    <legend><span class="section-index">05</span> Personal</legend>
+    <p class="section-description">Indicá la cantidad de personas que trabajan en el establecimiento.</p>
 
-    <div>
+    <div class="field">
       <label for="personalPermanente">Personal permanente</label>
       <input
         type="number"
@@ -200,7 +227,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label for="personalEventual">Personal eventual</label>
       <input
         type="number"
@@ -213,10 +240,11 @@
   </fieldset>
 
   <!-- SECCIÓN: Observaciones -->
-  <fieldset>
-    <legend>Observaciones</legend>
+  <fieldset class="form-section">
+    <legend><span class="section-index">06</span> Observaciones</legend>
+    <p class="section-description">Agregá cualquier información complementaria.</p>
 
-    <div>
+    <div class="field">
       <label for="observaciones">Observaciones</label>
       <textarea
         id="observaciones"
@@ -228,22 +256,42 @@
     </div>
   </fieldset>
 
-  <!-- Renderizado dinámico -->
-<ng-container [ngSwitch]="establecimiento.idCat">
-  <app-alojamiento-form *ngSwitchCase="1"></app-alojamiento-form>
-  <app-alojamiento-form *ngSwitchCase="2"></app-alojamiento-form>
-  <app-gastronomia-form *ngSwitchCase="3"></app-gastronomia-form>
-  <app-museo-sala-cultural-form *ngSwitchCase="4"></app-museo-sala-cultural-form>
-  <app-sala-evento-form *ngSwitchCase="5"></app-sala-evento-form>
-  <app-recreacion-diversion-form *ngSwitchCase="6"></app-recreacion-diversion-form>
-  <app-patrimonio-form *ngSwitchCase="7"></app-patrimonio-form>
-  <app-servicio-turistico-form *ngSwitchCase="8"></app-servicio-turistico-form>
-  <app-turismo-nautico-deportivo-form *ngSwitchCase="9"></app-turismo-nautico-deportivo-form>
-</ng-container>
+  <section class="category-detail" [class.is-visible]="establecimiento.idCat !== -1">
+    <div class="category-detail-header">
+      <div>
+        <p class="eyebrow">Paso 2 · Información específica</p>
+        <h2>{{ categoriaSeleccionada?.nombreCategoria || 'Elegí una categoría' }}</h2>
+        <p>{{ establecimiento.idCat === -1 ? 'Seleccioná una categoría para habilitar sus campos.' : 'Completá los datos propios de esta actividad turística.' }}</p>
+      </div>
+      <span class="category-mark" aria-hidden="true">02</span>
+    </div>
 
-  <button type="submit" [disabled]="cargando">
-    {{ cargando ? 'Guardando...' : 'Guardar establecimiento' }}
-  </button>
+    <div class="category-detail-body" [class.is-empty]="establecimiento.idCat === -1">
+      <ng-container [ngSwitch]="establecimiento.idCat">
+        <app-alojamiento-form *ngSwitchCase="1"></app-alojamiento-form>
+        <app-alojamiento-form *ngSwitchCase="2"></app-alojamiento-form>
+        <app-gastronomia-form *ngSwitchCase="3"></app-gastronomia-form>
+        <app-museo-sala-cultural-form *ngSwitchCase="4"></app-museo-sala-cultural-form>
+        <app-sala-evento-form *ngSwitchCase="5"></app-sala-evento-form>
+        <app-recreacion-diversion-form *ngSwitchCase="6"></app-recreacion-diversion-form>
+        <app-patrimonio-form *ngSwitchCase="7"></app-patrimonio-form>
+        <app-servicio-turistico-form *ngSwitchCase="8"></app-servicio-turistico-form>
+        <app-turismo-nautico-deportivo-form *ngSwitchCase="9"></app-turismo-nautico-deportivo-form>
+        <div *ngSwitchDefault class="empty-detail">
+          <span class="empty-detail-icon">↓</span>
+          <strong>El detalle aparecerá aquí</strong>
+          <span>Elegí una categoría en la sección anterior para continuar.</span>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+
+  <div class="form-actions">
+    <span class="required-note">* Campos obligatorios</span>
+    <button class="primary-action" type="submit" [disabled]="cargando">
+      {{ cargando ? 'Guardando...' : 'Guardar establecimiento' }}
+    </button>
+  </div>
 </form>
 
 <p *ngIf="mensaje" [class.exito]="exito" [class.error]="!exito">

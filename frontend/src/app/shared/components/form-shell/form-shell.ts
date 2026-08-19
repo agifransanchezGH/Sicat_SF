@@ -14,15 +14,32 @@ import { CommonModule } from '@angular/common';
   `,
   styles: [
     `
+      :host {
+        display: block;
+        width: 100%;
+      }
+
       .form-shell {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-        border: 1px solid #d0d7de;
-        border-radius: 8px;
-        background: #fff;
+        gap: 1.25rem;
+        width: min(100%, 920px);
+        margin: 2rem auto;
+        padding: 2rem 1.5rem;
+        border: 1px solid #dfe3e8;
+        border-radius: 16px;
+        background: #ffffff;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
       }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.8rem, 2vw, 2.3rem);
+        font-weight: 700;
+        color: #1f2937;
+        text-align: center;
+      }
+
       .feedback {
         margin: 0;
         color: #0a7d3d;

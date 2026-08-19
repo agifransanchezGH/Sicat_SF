@@ -67,6 +67,10 @@ export class EstablecimientoFormComponent implements OnInit {
 
   subcategorias: Subcategoria[] = [];
 
+  get categoriaSeleccionada(): Categoria | undefined {
+    return this.categorias.find((categoria) => categoria.idCat === this.establecimiento.idCat);
+  }
+
   ngOnInit(): void {
     this.categoriaService.listar().subscribe({
       next: (data) => this.categorias = data,

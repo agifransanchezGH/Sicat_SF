@@ -1,28 +1,47 @@
-<nav>
-  <mat-tab-group>
+<nav class="app-nav">
+  <mat-tab-group class="main-tabs" animationDuration="0ms">
     <mat-tab label="Carga">
-      <mat-tab-group>
-        <mat-tab label="Establecimiento">
-          <app-establecimiento-form></app-establecimiento-form>
-        </mat-tab>
-        
-        <mat-tab label="Categoria">
-          <app-categoria-form></app-categoria-form>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-tab>
-    <!-------------------------------------------------------------------------------------------->>
-    <mat-tab label="Listado / Búsqueda">
+      <div class="tab-panel">
+        <mat-tab-group class="sub-tabs" animationDuration="0ms">
+          <mat-tab label="Establecimiento">
+            <div class="form-row">
+              <div class="form-column">
+                <app-establecimiento-form></app-establecimiento-form>
+              </div>
+            </div>
+          </mat-tab>
 
-      <mat-tab-group>
-        <mat-tab label="Establecimiento">
-          <app-establecimiento-list></app-establecimiento-list>
-        </mat-tab>
-        
-        <mat-tab label="Categoria">
-          <app-categoria-list ></app-categoria-list>
-        </mat-tab>
-      </mat-tab-group>
+          <mat-tab label="Categoria">
+            <div class="form-row">
+              <div class="form-column">
+                <app-categoria-form></app-categoria-form>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Listado / Búsqueda">
+      <div class="tab-panel">
+        <mat-tab-group class="sub-tabs" animationDuration="0ms">
+          <mat-tab label="Establecimiento">
+            <div class="form-row">
+              <div class="form-column">
+                <app-establecimiento-list></app-establecimiento-list>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Categoria">
+            <div class="form-row">
+              <div class="form-column">
+                <app-categoria-list></app-categoria-list>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </nav>
